@@ -97,7 +97,7 @@ export default function Tickets() {
             </div>
 
             <p className="tickets__subtitle">
-              Choose your tier to experience The Weeknd, Linkin Park, Kendrick Lamar, Tame Impala, and Don Toliver live at Sir Manish Shetty Stadium, Mangalore.
+              Choose your tier to experience The Weeknd, Linkin Park, Kendrick Lamar, Tame Impala, and Eminem live at Sir Manish Shetty Stadium, Mangalore.
             </p>
           </div>
         </RevealUp>

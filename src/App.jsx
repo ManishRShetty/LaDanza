@@ -10,6 +10,8 @@ import Rules from './components/Rules'
 import Details from './components/Details'
 import Tickets from './components/Tickets'
 import Footer from './components/Footer'
+import AudioPlayer from './components/AudioPlayer'
+import { AudioProvider } from './context/AudioContext'
 
 export default function App() {
   const [loaded, setLoaded] = useState(false)
@@ -30,7 +32,7 @@ export default function App() {
   }, [])
 
   return (
-    <>
+    <AudioProvider>
       <FixedBackground />
       <Loader hidden={loaded} />
       <Nav ready={heroReady} />
@@ -42,6 +44,7 @@ export default function App() {
       <Details />
       <Tickets />
       <Footer />
-    </>
+      <AudioPlayer />
+    </AudioProvider>
   )
 }

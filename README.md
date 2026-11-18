@@ -23,7 +23,7 @@ LaDanza brings together 5 global icons across distinct musical dimensions onto o
 | **02** | **Linkin Park** | Alternative Rock Pioneers | *Hybrid Theory*, *Meteora*, *From Zero*, "In the End", "Numb" |
 | **03** | **Kendrick Lamar** | Hip-Hop Luminary & Cultural Titan | *DAMN.*, *good kid, m.A.A.d city*, Pulitzer Prize & 17x Grammys |
 | **04** | **Tame Impala** | Psychedelic Sound Architect | *Currents*, *The Slow Rush*, "The Less I Know The Better" |
-| **05** | **Don Toliver** | Melodic Rap & Psychedelic Trap Phenom | *HARDSTONE PSYCHO*, *Heaven Or Hell*, Cactus Jack |
+| **05** | **Eminem** | Rap God & Global Hip-Hop Legend | *The Marshall Mathers LP*, *The Eminem Show*, "Lose Yourself", "Without Me" |
 
 ### Lineup Visual Features:
 - **Paper-Cut Silhouette Treatment**: Portrait cutouts with smooth bottom gradient fadeouts (`linear-gradient(180deg, black 65%, transparent 100%)`) seamlessly melting into the stage floor without boxy card borders.
@@ -66,6 +66,17 @@ LaDanza brings together 5 global icons across distinct musical dimensions onto o
   - **Golden Circle VIP** (₹38,000) — Front-stage priority enclosure, fast-track lane, and exclusive Gold Lounge.
   - **Diamond All-Access** (₹75,000) — Elevated suite viewing, backstage tour, complimentary dining, and open bar.
 - Interactive tier selection, live quantity selector (1–6 passes), real-time total calculator, and animated checkout reservation button.
+
+### 7. Smooth Fading Cross-Fade Audio Engine (`AudioPlayer` & `AudioContext`)
+- **Ambient Party Music**: Plays the party background music with a floating glassmorphic controller and animated golden equalizer waves (`||||`).
+- **Individual Artist Audio Playback**: Clicking any headliner card smoothly cross-fades into their iconic preview track:
+  - **The Weeknd**: "Starboy (feat. Daft Punk)"
+  - **Linkin Park**: "In The End"
+  - **Kendrick Lamar**: "HUMBLE."
+  - **Tame Impala**: "New Person, Same Old Mistakes"
+  - **Eminem**: "Without Me"
+- **850ms Smooth Linear Interpolation**: Seamless, continuous volume cross-fade between tracks without harsh audio clipping.
+- Floating controller allows one-tap toggling between artist previews and the ambient party vibe.
 
 ---
 

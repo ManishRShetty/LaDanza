@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import RevealUp from './RevealUp'
+import { useAudio } from '../context/AudioContext'
 import '../styles/artists.css'
 
 // ── LaDanza Headlining Superstars ──
@@ -18,6 +19,7 @@ const artistsData = [
     bio: 'Four-time Grammy-winning icon behind After Hours and Dawn FM, headlining with cinematic falsettos, thunderous retro synth basslines, and stadium-shaking anthems like "Blinding Lights" and "Starboy".',
     img: '/images/artists/the-weeknd.jpg',
     number: '01',
+    songTitle: 'Starboy',
   },
   {
     id: 2,
@@ -27,6 +29,7 @@ const artistsData = [
     bio: 'The multi-platinum arena legends behind Hybrid Theory and Meteora, unleashing electrifying new energy with colossal guitar riffs, soaring dual vocals, and timeless anthems like "In the End" and "Numb".',
     img: '/images/artists/linkin-park.jpg',
     number: '02',
+    songTitle: 'In the End',
   },
   {
     id: 3,
@@ -36,6 +39,7 @@ const artistsData = [
     bio: 'Pulitzer Prize and 17-time Grammy-winning heavyweight, commanding the stage with razor-sharp lyrical mastery, cinematic stagecraft, and groundbreaking classics from DAMN. and good kid, m.A.A.d city.',
     img: '/images/artists/kendrick-lamar.jpg',
     number: '03',
+    songTitle: 'HUMBLE.',
   },
   {
     id: 4,
@@ -45,21 +49,29 @@ const artistsData = [
     bio: 'Kevin Parker’s visionary project weaving kaleidoscopic analog synths, hypnotic disco-rock drums, and lush reverb into an ethereal sensory journey with hits like "The Less I Know The Better".',
     img: '/images/artists/tame-impala.jpg',
     number: '04',
+    songTitle: 'New Person, Same Old Mistakes',
   },
   {
     id: 5,
-    name: 'Don Toliver',
-    role: 'Melodic Rap & Psychedelic Trap Phenom',
-    genre: 'Psychedelic Trap • Melodic Hip-Hop • R&B',
-    bio: 'Chart-topping Houston innovator revered for intoxicating vocal melodies, futuristic soundscapes, and hypnotic late-night anthems from HARDSTONE PSYCHO and Heaven Or Hell.',
-    img: '/images/artists/don-toliver.jpg',
+    name: 'Eminem',
+    role: 'Rap God & Global Hip-Hop Legend',
+    genre: 'Hip-Hop • Rap • Hardcore Lyricism',
+    bio: 'The best-selling rap artist in history and 15-time Grammy icon, headlining with blistering technical flows, ferocious stage presence, and immortal stadium anthems like "Lose Yourself", "Without Me", and "Houdini".',
+    img: '/images/artists/eminem.jpg',
     number: '05',
+    songTitle: 'Without Me',
   },
 ]
 
 export default function Artists() {
   const [activeMemberIndex, setActiveMemberIndex] = useState(0) // Default to The Weeknd
   const activeMember = artistsData[activeMemberIndex]
+  const { isPlaying, activeArtistId, playArtistTrack } = useAudio()
+
+  const handleArtistClick = (idx, memberId) => {
+    setActiveMemberIndex(idx)
+    playArtistTrack(memberId)
+  }
 
   return (
     <section className="artists" id="artists">
@@ -111,23 +123,26 @@ export default function Artists() {
           <div className="artists__lineup-badge-wrap">
             <div className="artists__lineup-badge">
               <span className="artists__lineup-dot" />
-              <span>STELLAR LINEUP &bull; 5 HEADLINING ACTS</span>
+              <span>STELLAR LINEUP &bull; 5 HEADLINING ACTS &bull; CLICK TO HEAR MUSIC</span>
             </div>
           </div>
 
           <div className="artists__members-row" role="list" aria-label="Headlining Artists">
             {artistsData.map((member, idx) => {
               const isSelected = activeMemberIndex === idx
+              const isTrackPlaying = activeArtistId === member.id && isPlaying
+
               return (
                 <div
                   key={member.id}
-                  className={`artist-card${isSelected ? ' is-active' : ''}`}
+                  className={`artist-card${isSelected ? ' is-active' : ''}${isTrackPlaying ? ' is-audio-playing' : ''}`}
                   onMouseEnter={() => setActiveMemberIndex(idx)}
-                  onClick={() => setActiveMemberIndex(idx)}
+                  onClick={() => handleArtistClick(idx, member.id)}
                   role="listitem"
                   tabIndex={0}
                   onFocus={() => setActiveMemberIndex(idx)}
-                  aria-label={`${member.name} - ${member.role}`}
+                  aria-label={`${member.name} - ${member.role}. Click to play track.`}
+                  title={`Click to listen to ${member.name}`}
                 >
                   {/* Silhouette Figure */}
                   <div className="artist-card__figure">
@@ -138,6 +153,16 @@ export default function Artists() {
                       loading="lazy"
                     />
                     <div className="artist-card__aura" aria-hidden="true" />
+
+                    {/* Playing Audio Badge Indicator */}
+                    {isTrackPlaying && (
+                      <div className="artist-card__playing-badge" aria-hidden="true">
+                        <span className="artist-card__eq-bar" />
+                        <span className="artist-card__eq-bar" />
+                        <span className="artist-card__eq-bar" />
+                        <span>PLAYING</span>
+                      </div>
+                    )}
                   </div>
 
                   {/* Member Name Pill */}
@@ -164,6 +189,26 @@ export default function Artists() {
             <p className="artist-spotlight__bio">
               {activeMember.bio}
             </p>
+
+            {/* Audio Preview Trigger Button with Smooth Cross-Fade */}
+            <div className="artist-spotlight__audio-bar">
+              <button
+                type="button"
+                className={`artist-spotlight__audio-btn${activeArtistId === activeMember.id && isPlaying ? ' is-playing' : ''}`}
+                onClick={() => playArtistTrack(activeMember.id)}
+                aria-label={`Play preview for ${activeMember.name}`}
+              >
+                <span className="artist-spotlight__audio-icon">
+                  {activeArtistId === activeMember.id && isPlaying ? '⏸' : '▶'}
+                </span>
+                <span className="artist-spotlight__audio-text">
+                  {activeArtistId === activeMember.id && isPlaying
+                    ? `Playing "${activeMember.songTitle}" (Click to Pause)`
+                    : `Preview "${activeMember.songTitle}" — ${activeMember.name}`}
+                </span>
+                <span className="artist-spotlight__fade-tag">Smooth Cross-Fade</span>
+              </button>
+            </div>
           </div>
         </RevealUp>
 
