@@ -9,7 +9,7 @@
 
 **LaDanza** is a fictional live music experience conceived as the ultimate dream arena event. The website is engineered to immerse visitors from the moment they enter with slow, blurred-out preloader dissolves, metallic script typography, and interactive headliner showcases featuring world-class superstars.
 
-Developed for the **Student Council** by **Nexus SIT**.
+Designed &amp; Developed by **Nexus SIT**.
 
 ---
 
@@ -193,5 +193,4 @@ npm run preview
 ## 👥 Credits
 
 - **Event Concept**: LaDanza 2026
-- **Developed for**: Student Council
 - **Engineering & Design**: Nexus SIT

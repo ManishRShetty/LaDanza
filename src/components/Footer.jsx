@@ -49,7 +49,7 @@ export default function Footer() {
           <div className="footer__bottom">
             <p>&copy; 2026 LADANZA. All rights reserved.</p>
             <div className="footer__credit">
-              <p>Developed for <strong>Student Council</strong> by <strong>Nexus SIT</strong></p>
+              <p>Designed &amp; Developed by <strong>Nexus SIT</strong></p>
               <div className="footer__devs">
                 <a href="https://github.com/" target="_blank" rel="noopener noreferrer">Developer 1</a>
                 <span className="footer__dev-dot" />
