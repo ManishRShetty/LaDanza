@@ -21,21 +21,24 @@
 }
 
 :root {
-  --bg:       #0a0a0a;
-  --bg-card:  #111111;
-  --bg-card2: #161616;
-  --surface:  #1a1a1a;
-  --border:   #222222;
-  --text:     #e8e8e8;
-  --text-dim: #888888;
-  --accent:   #d4a853;
-  --accent2:  #c0943f;
-  --white:    #ffffff;
-  --font:     'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --serif:    'Times New Roman', Times, Georgia, serif;
-  --script:   'Moduley', cursive;
-  --ease:     cubic-bezier(.22, 1, .36, 1);
-  --radius:   12px;
+  --bg:        #080503;
+  --bg-card:   #120a05;
+  --bg-card2:  #180e07;
+  --surface:   #201209;
+  --border:    rgba(229, 179, 100, 0.16);
+  --border-light: rgba(229, 179, 100, 0.35);
+  --text:      #f5ece3;
+  --text-dim:  #a38e7d;
+  --accent:    #e5b364;
+  --accent2:   #ca9846;
+  --accent-light: #fff3d6;
+  --gold-glow: rgba(229, 179, 100, 0.45);
+  --white:     #ffffff;
+  --font:      'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --serif:     'Times New Roman', Times, Georgia, serif;
+  --script:    'Moduley', cursive;
+  --ease:      cubic-bezier(.22, 1, .36, 1);
+  --radius:    14px;
 }
 
 html {
@@ -65,6 +68,13 @@ a {
 ul { list-style: none; }
 
 /* ── Shared Utilities ──────────────────────────── */
+.gold-gradient-text {
+  background: linear-gradient(180deg, #ffffff 0%, #fae6ba 30%, #e2ab55 65%, #9e6c27 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
 .reveal-up {
   opacity: 0;
   transform: translateY(40px);

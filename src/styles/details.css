@@ -8,13 +8,14 @@
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 2rem;
-  transition: transform .4s var(--ease), border-color .3s;
+  padding: 2.25rem 2rem;
+  transition: transform .4s var(--ease), border-color .3s, box-shadow .3s;
 }
 
 .detail-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--accent);
+  transform: translateY(-4px);
+  border-color: rgba(229, 179, 100, 0.45);
+  box-shadow: 0 14px 40px rgba(229, 163, 62, 0.16);
 }
 
 .detail-card__icon {

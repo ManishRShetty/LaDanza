@@ -9,12 +9,13 @@
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  transition: transform .4s var(--ease), box-shadow .4s;
+  transition: transform .4s var(--ease), box-shadow .4s, border-color .4s;
 }
 
 .artist-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, .4);
+  transform: translateY(-5px);
+  border-color: rgba(229, 179, 100, 0.45);
+  box-shadow: 0 16px 45px rgba(229, 163, 62, 0.18);
 }
 
 .artist-card__img-wrap {

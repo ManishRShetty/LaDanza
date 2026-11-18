@@ -10,12 +10,15 @@ export default function Nav() {
 
   return (
     <nav className={`nav${scrolled ? ' is-scrolled' : ''}`}>
-      <a href="#hero" className="nav__logo">Novera</a>
+      <a href="#hero" className="nav__logo">
+        <span className="nav__logo-text gold-gradient-text">Novera</span>
+        <span className="nav__logo-star" aria-hidden="true">✦</span>
+      </a>
 
       <button
         className={`nav__toggle${open ? ' is-open' : ''}`}
         onClick={() => setOpen(o => !o)}
-        aria-label="Toggle menu"
+        aria-label="Toggle navigation menu"
       >
         <span /><span /><span />
       </button>
