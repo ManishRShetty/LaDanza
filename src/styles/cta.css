@@ -1,0 +1,56 @@
+/* ── CTA Band ──────────────────────────────────── */
+.cta {
+  position: relative;
+  padding: 8rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.cta__bg {
+  position: absolute;
+  inset: 0;
+}
+
+.cta__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cta__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, .82);
+}
+
+.cta__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 560px;
+}
+
+.cta__kicker {
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .25em;
+  color: var(--accent);
+  margin-bottom: .75rem;
+}
+
+.cta__title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.cta__sub {
+  font-size: 1rem;
+  color: var(--text-dim);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}

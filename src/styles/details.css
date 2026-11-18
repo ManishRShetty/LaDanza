@@ -1,0 +1,48 @@
+/* ── Details Grid ──────────────────────────────── */
+.details-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.detail-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  transition: transform .4s var(--ease), border-color .3s;
+}
+
+.detail-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
+
+.detail-card__icon {
+  font-size: 1.6rem;
+  margin-bottom: .75rem;
+}
+
+.detail-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: .5rem;
+}
+
+.detail-card p {
+  font-size: .9rem;
+  line-height: 1.65;
+  color: var(--text-dim);
+}
+
+@media (min-width: 640px) {
+  .details-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .details-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

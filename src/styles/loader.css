@@ -1,0 +1,36 @@
+/* ── Loader ────────────────────────────────────── */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .6s var(--ease), visibility .6s;
+}
+
+.loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader__inner {
+  display: flex;
+  gap: 4px;
+}
+
+.loader__letter {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 8vw, 5rem);
+  font-weight: 700;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: loaderIn .5s var(--ease) forwards;
+}
+
+@keyframes loaderIn {
+  to { opacity: 1; transform: translateY(0); }
+}
