@@ -12,14 +12,14 @@ export default function Details() {
   return (
     <section className="section details" id="details">
       <div className="section__inner">
-        <RevealUp className="section__kicker">The Details</RevealUp>
-        <RevealUp as="h2" className="section__title">
+        <RevealUp className="section__kicker" delay={0.05}>The Details</RevealUp>
+        <RevealUp as="h2" className="section__title" delay={0.15}>
           Everything You Need to Know
         </RevealUp>
 
         <div className="details-grid">
           {details.map((d, i) => (
-            <RevealUp key={i} delay={i * 0.06}>
+            <RevealUp key={i} delay={0.15 + i * 0.12}>
               <div className="detail-card">
                 <div className="detail-card__icon">{d.icon}</div>
                 <h3>{d.title}</h3>

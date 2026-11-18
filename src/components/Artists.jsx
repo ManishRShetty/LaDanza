@@ -45,13 +45,15 @@ export default function Artists() {
   return (
     <section className="section artists" id="artists">
       <div className="section__inner">
-        <RevealUp className="section__kicker">The Lineup</RevealUp>
-        <RevealUp as="h2" className="section__title">
+        <RevealUp className="section__kicker" delay={0.05}>
+          The Lineup
+        </RevealUp>
+        <RevealUp as="h2" className="section__title" delay={0.15}>
           Meet the Artists
         </RevealUp>
 
         {/* ── Interactive 3D Accordion Gallery from React Bits ── */}
-        <RevealUp delay={0.15}>
+        <RevealUp delay={0.25}>
           <div className="artists__gallery-wrapper">
             <AccordionGallery
               items={galleryItems}
@@ -74,7 +76,7 @@ export default function Artists() {
         {/* ── Performer Information & Bios ── */}
         <div className="artist-bios-grid">
           {artists.map((a, i) => (
-            <RevealUp key={i} delay={i * 0.08}>
+            <RevealUp key={i} delay={0.1 + i * 0.12}>
               <div className="artist-bio-card">
                 <div className="artist-bio-card__header">
                   <span className="artist-bio-card__num">0{i + 1}</span>

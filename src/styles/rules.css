@@ -7,6 +7,12 @@
   border-radius: var(--radius);
   padding: 2.25rem 2rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.story__step.is-active .rule-card {
+  border-color: rgba(229, 179, 100, 0.45);
+  box-shadow: 0 16px 45px rgba(229, 163, 62, 0.2);
 }
 
 .rule-card__num {

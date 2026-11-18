@@ -46,10 +46,15 @@
 }
 
 .story__step {
-  margin-bottom: 80vh;
+  margin-bottom: 75vh;
   opacity: 0;
-  transform: translateY(50px);
-  transition: opacity .7s var(--ease), transform .7s var(--ease);
+  filter: blur(24px) brightness(1.4);
+  transform: translateY(38px) scale(0.96);
+  transition:
+    opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, filter, transform;
 }
 
 .story__step:last-child {
@@ -58,7 +63,8 @@
 
 .story__step.is-active {
   opacity: 1;
-  transform: translateY(0);
+  filter: blur(0px) brightness(1);
+  transform: translateY(0) scale(1);
 }
 
 .story__step > p {
