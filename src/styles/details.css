@@ -1,49 +1,407 @@
-/* ── Details Grid ──────────────────────────────── */
-.details-grid {
-  display: grid;
-  gap: 1.25rem;
+/* ═══════════════════════════════════════════════════
+   LADANZA — The Details Section (Reference Poster Match)
+   Neon Glassmorphic Glow Cards: Gold, Purple, Amber, Cyan
+   ═══════════════════════════════════════════════════ */
+
+.details-section {
+  position: relative;
+  padding: 6.5rem 1.5rem 5rem;
+  background: transparent;
+  overflow: hidden;
+  z-index: 2;
 }
 
-.detail-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2.25rem 2rem;
-  transition: transform .4s var(--ease), border-color .3s, box-shadow .3s;
+.details-section__ambient {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 480px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(229, 179, 100, 0.06) 0%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
 }
 
-.detail-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(229, 179, 100, 0.45);
-  box-shadow: 0 14px 40px rgba(229, 163, 62, 0.16);
+.details-section__container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.detail-card__icon {
-  font-size: 1.6rem;
-  margin-bottom: .75rem;
+/* ── Section Header (Left-Aligned matching reference) ── */
+.details-section__header {
+  text-align: left;
+  margin-bottom: 2.8rem;
 }
 
-.detail-card h3 {
-  font-size: 1rem;
+.details-section__eyebrow-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.65rem;
+}
+
+.details-section__kicker {
+  font-family: var(--serif);
+  font-size: 0.82rem;
   font-weight: 600;
-  color: var(--white);
-  margin-bottom: .5rem;
+  letter-spacing: 0.28em;
+  color: #eed6aa;
+  text-transform: uppercase;
 }
 
-.detail-card p {
-  font-size: .9rem;
-  line-height: 1.65;
-  color: var(--text-dim);
+.details-section__line {
+  width: 55px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(229, 179, 100, 0.75) 0%,
+    transparent 100%
+  );
 }
 
-@media (min-width: 640px) {
-  .details-grid {
+.details-section__title {
+  font-family: var(--serif);
+  font-size: clamp(2.3rem, 5.2vw, 3.6rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5rem;
+}
+
+.details-section__title-script {
+  font-family: var(--script, 'Moduley'), cursive;
+  font-style: italic;
+  font-weight: 400;
+  color: #e5b364;
+  background: linear-gradient(135deg, #fff5db 0%, #e5b364 50%, #ca9846 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 18px rgba(229, 179, 100, 0.4));
+  padding-left: 0.15em;
+}
+
+.details-section__sub {
+  font-size: 1.05rem;
+  color: #a8998a;
+  margin: 0;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+/* ── 4 Glowing Neon Glass Cards Grid ─────────────── */
+.details-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.35rem;
+  width: 100%;
+  margin-bottom: 3.5rem;
+}
+
+/* Base Neon Card */
+.neon-detail-card {
+  position: relative;
+  overflow: hidden;
+  background: rgba(14, 8, 4, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 18px;
+  padding: 2.2rem 1.6rem 2.2rem;
+  min-height: 255px;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+  user-select: none;
+}
+
+/* ── Theme 1: Date (Warm Gold / Amber) ───────────── */
+.neon-detail-card--gold {
+  border: 1px solid rgba(229, 179, 100, 0.48);
+  box-shadow:
+    0 10px 32px rgba(229, 163, 62, 0.16),
+    inset 0 0 20px rgba(229, 179, 100, 0.05);
+}
+
+.neon-detail-card--gold .neon-detail-card__badge-box {
+  background: rgba(36, 18, 6, 0.9);
+  border: 1px solid rgba(229, 179, 100, 0.65);
+  box-shadow: 0 0 18px rgba(229, 163, 62, 0.38);
+}
+
+.neon-detail-card--gold:hover {
+  transform: translateY(-6px);
+  border-color: rgba(229, 179, 100, 0.88);
+  box-shadow:
+    0 16px 42px rgba(229, 163, 62, 0.32),
+    inset 0 0 26px rgba(229, 179, 100, 0.1);
+}
+
+/* ── Theme 2: Venue (Electric Violet / Purple) ───── */
+.neon-detail-card--purple {
+  border: 1px solid rgba(168, 85, 247, 0.52);
+  box-shadow:
+    0 10px 32px rgba(168, 85, 247, 0.18),
+    inset 0 0 20px rgba(168, 85, 247, 0.05);
+}
+
+.neon-detail-card--purple .neon-detail-card__badge-box {
+  background: rgba(32, 10, 56, 0.92);
+  border: 1px solid rgba(168, 85, 247, 0.72);
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.42);
+}
+
+.neon-detail-card--purple:hover {
+  transform: translateY(-6px);
+  border-color: rgba(192, 132, 252, 0.9);
+  box-shadow:
+    0 16px 42px rgba(168, 85, 247, 0.36),
+    inset 0 0 26px rgba(168, 85, 247, 0.12);
+}
+
+/* ── Theme 3: Tickets (Warm Amber / Bronze) ──────── */
+.neon-detail-card--amber {
+  border: 1px solid rgba(245, 158, 11, 0.48);
+  box-shadow:
+    0 10px 32px rgba(245, 158, 11, 0.16),
+    inset 0 0 20px rgba(245, 158, 11, 0.05);
+}
+
+.neon-detail-card--amber .neon-detail-card__badge-box {
+  background: rgba(40, 18, 5, 0.9);
+  border: 1px solid rgba(245, 158, 11, 0.65);
+  box-shadow: 0 0 18px rgba(245, 158, 11, 0.38);
+}
+
+.neon-detail-card--amber:hover {
+  transform: translateY(-6px);
+  border-color: rgba(251, 191, 36, 0.88);
+  box-shadow:
+    0 16px 42px rgba(245, 158, 11, 0.32),
+    inset 0 0 26px rgba(245, 158, 11, 0.1);
+}
+
+/* ── Theme 4: Parking (Electric Cyan / Blue) ─────── */
+.neon-detail-card--cyan {
+  border: 1px solid rgba(56, 189, 248, 0.52);
+  box-shadow:
+    0 10px 32px rgba(56, 189, 248, 0.18),
+    inset 0 0 20px rgba(56, 189, 248, 0.05);
+}
+
+.neon-detail-card--cyan .neon-detail-card__badge-box {
+  background: rgba(8, 28, 52, 0.92);
+  border: 1px solid rgba(56, 189, 248, 0.72);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.42);
+}
+
+.neon-detail-card--cyan:hover {
+  transform: translateY(-6px);
+  border-color: rgba(125, 211, 252, 0.9);
+  box-shadow:
+    0 16px 42px rgba(56, 189, 248, 0.36),
+    inset 0 0 26px rgba(56, 189, 248, 0.12);
+}
+
+/* ── Card Interior Components ────────────────────── */
+
+/* Top-Left Glowing Square Badge Box */
+.neon-detail-card__badge-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.35s ease;
+}
+
+.neon-detail-card:hover .neon-detail-card__badge-box {
+  transform: scale(1.06);
+}
+
+.detail-badge-svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Watermark Illustration */
+.neon-detail-card__watermark-wrap {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  pointer-events: none;
+  z-index: 1;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.neon-detail-card:hover .neon-detail-card__watermark-wrap {
+  transform: scale(1.05) translate(2px, -2px);
+  opacity: 0.95;
+}
+
+.detail-watermark-svg {
+  width: 105px;
+  height: 95px;
+}
+
+/* Card Heading */
+.neon-detail-card__heading {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 1.15rem;
+  letter-spacing: 0.02em;
+  position: relative;
+  z-index: 2;
+}
+
+/* Items List */
+.neon-detail-card__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 2;
+}
+
+.neon-detail-card__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+
+.neon-detail-card__item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.item-icon-svg {
+  width: 16px;
+  height: 16px;
+}
+
+.neon-detail-card__item-text {
+  font-size: 0.88rem;
+  line-height: 1.48;
+  color: #dfd5c9;
+  letter-spacing: 0.01em;
+}
+
+/* Soft Bottom Neon Edge Glow Accent */
+.neon-detail-card__bottom-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  pointer-events: none;
+  opacity: 0.6;
+  transition: opacity 0.35s ease;
+}
+
+.neon-detail-card:hover .neon-detail-card__bottom-glow {
+  opacity: 0.9;
+}
+
+.neon-detail-card--gold .neon-detail-card__bottom-glow {
+  background: radial-gradient(ellipse at bottom, rgba(229, 179, 100, 0.28) 0%, transparent 70%);
+}
+
+.neon-detail-card--purple .neon-detail-card__bottom-glow {
+  background: radial-gradient(ellipse at bottom, rgba(168, 85, 247, 0.32) 0%, transparent 70%);
+}
+
+.neon-detail-card--amber .neon-detail-card__bottom-glow {
+  background: radial-gradient(ellipse at bottom, rgba(245, 158, 11, 0.28) 0%, transparent 70%);
+}
+
+.neon-detail-card--cyan .neon-detail-card__bottom-glow {
+  background: radial-gradient(ellipse at bottom, rgba(56, 189, 248, 0.32) 0%, transparent 70%);
+}
+
+/* ── Center Sparkle Star Divider Line ────────────── */
+.details-section__divider-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  opacity: 0.85;
+}
+
+.details-section__divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(229, 179, 100, 0.5) 50%,
+    transparent 100%
+  );
+}
+
+.details-section__divider-star {
+  font-size: 1.1rem;
+  color: #e5b364;
+  filter: drop-shadow(0 0 10px rgba(229, 179, 100, 0.8));
+  user-select: none;
+}
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE DESIGN
+   ══════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .details-cards-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
   }
 }
 
-@media (min-width: 1024px) {
-  .details-grid {
-    grid-template-columns: repeat(4, 1fr);
+@media (max-width: 640px) {
+  .details-section {
+    padding: 5rem 1rem 4rem;
+  }
+
+  .details-section__header {
+    text-align: center;
+  }
+
+  .details-section__eyebrow-wrap {
+    justify-content: center;
+  }
+
+  .details-cards-grid {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .neon-detail-card {
+    min-height: auto;
+    padding: 1.8rem 1.4rem;
   }
 }

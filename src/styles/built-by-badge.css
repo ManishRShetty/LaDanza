@@ -1,0 +1,121 @@
+/* ═══════════════════════════════════════════════════
+   BuiltByBadge — Minimal Signature Footer Bar
+   ═══════════════════════════════════════════════════ */
+
+.built-by-badge {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  background: #000000;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.85rem 1rem;
+  animation: badgeFadeIn 0.5s ease-out forwards;
+}
+
+@keyframes badgeFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.built-by-badge__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+/* Logo */
+.built-by-badge__logo-link {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+
+.built-by-badge__logo-link:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.built-by-badge__logo-link:active {
+  transform: scale(0.95);
+}
+
+.built-by-badge__logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Dot separator */
+.built-by-badge__dot {
+  color: #404040;
+  font-size: 0.75rem;
+  user-select: none;
+  line-height: 1;
+}
+
+/* Year */
+.built-by-badge__year {
+  font-size: 0.75rem;
+  color: #525252;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  user-select: none;
+  line-height: 1;
+}
+
+/* Label */
+.built-by-badge__label {
+  font-size: 0.75rem;
+  color: #737373;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+/* Name Link */
+.built-by-badge__name-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #d4d4d4;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+  line-height: 1;
+}
+
+.built-by-badge__name-link:hover {
+  color: #ffffff;
+  transform: scale(1.03);
+}
+
+.built-by-badge__name-link:active {
+  transform: scale(0.97);
+}
+
+/* External Link Micro-Icon */
+.built-by-badge__ext-icon {
+  opacity: 0.4;
+  transform: translateY(-1px);
+  transition: opacity 0.2s ease;
+}
+
+.built-by-badge__name-link:hover .built-by-badge__ext-icon {
+  opacity: 0.85;
+}

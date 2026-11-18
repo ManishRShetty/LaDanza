@@ -10,6 +10,7 @@ import Rules from './components/Rules'
 import Details from './components/Details'
 import Tickets from './components/Tickets'
 import Footer from './components/Footer'
+import BuiltByBadge from './components/BuiltByBadge'
 import AudioPlayer from './components/AudioPlayer'
 import { AudioProvider } from './context/AudioContext'
 
@@ -44,6 +45,7 @@ export default function App() {
       <Details />
       <Tickets />
       <Footer />
+      <BuiltByBadge />
       <AudioPlayer />
     </AudioProvider>
   )

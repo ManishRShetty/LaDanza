@@ -138,6 +138,7 @@ Novera/
 │   │   ├── Details.jsx             # Event date, venue, tickets, and parking
 │   │   ├── FixedBackground.jsx     # Globally fixed concert stage & spotlights
 │   │   ├── Footer.jsx              # Links, legal, copyright, and developer credits
+│   │   ├── BuiltByBadge.jsx        # Minimal signature footer bar linked to portfolio
 │   │   ├── Hero.jsx                # Poster reproduction with Moduley title & orbit
 │   │   ├── Loader.jsx              # Apple-style de-blur preloader with bloom
 │   │   ├── Nav.jsx                 # Fixed glassmorphic navigation bar
@@ -193,4 +194,5 @@ npm run preview
 ## 👥 Credits
 
 - **Event Concept**: LaDanza 2026
+- **Creator / Built by**: [Manish R. Shetty](https://manishramshetty.vercel.app)
 - **Engineering & Design**: Nexus
