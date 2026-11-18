@@ -1,57 +1,64 @@
 import RevealUp from './RevealUp'
-import StoryStep from './StoryStep'
 import '../styles/rules.css'
 
 const rules = [
   {
     num: '01',
-    title: 'Entry & ID',
-    desc: 'Valid government-issued photo ID is mandatory for entry. You must be 16+ to attend. Wristbands are non-transferable and must be worn at all times inside the venue.',
+    tag: 'ADMISSION',
+    title: 'Entry & Government ID',
+    desc: 'Valid government-issued photo ID is mandatory for admission. Attendees must be 16+. Wristbands issued at the gate are non-transferable and must remain securely worn throughout the concert.',
   },
   {
     num: '02',
+    tag: 'RESTRICTED',
     title: 'Prohibited Items',
-    desc: 'No weapons, glass bottles, illegal substances, professional cameras, drones, laser pointers, or fireworks. Outside food & beverages are not permitted.',
+    desc: 'Weapons, glass bottles, illegal substances, professional camera rigs, drones, laser pointers, and fireworks are strictly forbidden. Outside food and beverages are not permitted.',
   },
   {
     num: '03',
+    tag: 'PROTOCOL',
     title: 'Safety & Conduct',
-    desc: 'Follow all instructions from event staff and security. Any form of harassment, violence, or disruptive behaviour will result in immediate removal without refund.',
+    desc: 'Follow all directives from event security and medical staff. Any harassment, intoxication, or disorderly behavior will prompt immediate venue ejection without refund.',
   },
   {
     num: '04',
+    tag: 'MEDIA',
     title: 'Recording Policy',
-    desc: 'Personal phone photography and short video clips are welcome. Professional recording equipment, tripods, and live-streaming without authorisation are strictly prohibited.',
+    desc: 'Personal mobile photography and short celebratory video clips are welcome. Professional recording equipment, tripods, and unauthorized commercial live-streams are strictly prohibited.',
   },
   {
     num: '05',
+    tag: 'TICKETING',
     title: 'Re-Entry & Refunds',
-    desc: 'No re-entry once you exit the venue. Tickets are non-refundable except in the event of cancellation by the organisers. Resale of tickets is not permitted.',
+    desc: 'No re-entry once you exit the arena gates. All ticket sales are final and non-refundable, except in the event of official cancellation declared by event organizers.',
   },
 ]
 
 export default function Rules() {
   return (
-    <section className="story story--rules" id="rules">
-      <div className="story__sticky">
-        <div className="story__center">
-          <RevealUp className="story__kicker">Before You Arrive</RevealUp>
-          <RevealUp as="h2" className="story__heading">
-            Rules &amp; Regulations
-          </RevealUp>
-        </div>
-      </div>
+    <section className="section rules" id="rules">
+      <div className="section__inner">
+        <RevealUp className="section__kicker" delay={0.05}>
+          BEFORE YOU ARRIVE
+        </RevealUp>
+        <RevealUp as="h2" className="section__title" delay={0.15}>
+          Rules &amp; Regulations
+        </RevealUp>
 
-      <div className="story__steps">
-        {rules.map((r, i) => (
-          <StoryStep key={i}>
-            <div className="rule-card">
-              <span className="rule-card__num">{r.num}</span>
-              <h3>{r.title}</h3>
-              <p>{r.desc}</p>
-            </div>
-          </StoryStep>
-        ))}
+        <div className="rules-grid">
+          {rules.map((r, i) => (
+            <RevealUp key={r.num} delay={0.1 + i * 0.08}>
+              <div className="rule-card">
+                <div className="rule-card__top">
+                  <span className="rule-card__num">{r.num}</span>
+                  <span className="rule-card__tag">{r.tag}</span>
+                </div>
+                <h3 className="rule-card__title">{r.title}</h3>
+                <p className="rule-card__desc">{r.desc}</p>
+              </div>
+            </RevealUp>
+          ))}
+        </div>
       </div>
     </section>
   )
