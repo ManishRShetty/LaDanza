@@ -55,7 +55,7 @@ LaDanza brings together 5 global icons across distinct musical dimensions onto o
 - Luminous glass capsule CTA button with breathing golden lens flare and sweep animation.
 
 ### 4. Rules & Guidelines Grid
-- 5 dark glassmorphic cards (`Entry & Identity`, `Prohibited Items`, `Code of Conduct`, `Safety & Medical`, `Photography`) with Times New Roman serif numerals (`01`–`05`) and golden category tags.
+- 5 dark glassmorphic cards (`Entry & Identity`, `Prohibited Items`, `Code of Conduct`, `Safety & Medical`, `Photography`) with Carmila serif numerals (`01`–`05`) and golden category tags.
 
 ### 5. Event Logistics & Details
 - Clean 4-card overview covering Date (`18 — 19 December 2026`), Venue (`Sir Manish Shetty Stadium, Mangalore`), Tickets (`Starting from ₹20,000`), and Parking/Transit guidance.
@@ -105,7 +105,7 @@ LaDanza brings together 5 global icons across distinct musical dimensions onto o
 | **Accent Gold** | `--accent: #e5b364`, `--accent-bright: #f5d696`, `--accent-dim: #ca9846` |
 | **Surface Glass** | `rgba(18, 10, 5, 0.75)` with `backdrop-filter: blur(12px)` |
 | **Primary Script** | `'Moduley', cursive` *(Hero brand, navbar logo, preloader)* |
-| **Editorial Serif** | `'Times New Roman', Times, Georgia, serif` *(Section headings, numerals, spotlight titles)* |
+| **Editorial Serif** | `'Carmila', Georgia, serif` *(Section headings, numerals, spotlight titles)* |
 | **Body Font** | `'Inter', system-ui, sans-serif` |
 
 ---

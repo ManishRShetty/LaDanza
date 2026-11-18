@@ -13,6 +13,14 @@
 }
 
 @font-face {
+  font-family: 'Carmila';
+  src: url('/fonts/Carmila.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Moduley';
   src: url('/fonts/moduley.otf') format('opentype');
   font-weight: normal;
@@ -35,7 +43,7 @@
   --gold-glow: rgba(229, 179, 100, 0.45);
   --white:     #ffffff;
   --font:      'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --serif:     'Times New Roman', Times, Georgia, serif;
+  --serif:     'Carmila', Georgia, serif;
   --script:    'Moduley', cursive;
   --ease:      cubic-bezier(.22, 1, .36, 1);
   --radius:    14px;
