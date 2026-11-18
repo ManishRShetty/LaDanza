@@ -85,13 +85,13 @@ export default function Hero({ ready = true }) {
         {/* Eyebrow with gold horizontal framing lines */}
         <div className="hero__eyebrow-container hero__blur-stage hero__blur-stage--1">
           <span className="hero__eyebrow-line" />
-          <p className="hero__eyebrow">A LIVE STUDENT EXPERIENCE</p>
+          <p className="hero__eyebrow">A LIVE CONCERT EXPERIENCE</p>
           <span className="hero__eyebrow-line" />
         </div>
 
         {/* Center Title with Golden Swoosh Orbit & Sparkle Stars */}
         <div className="hero__title-container hero__blur-stage hero__blur-stage--2">
-          <h1 className="hero__title gold-gradient-text">Novera</h1>
+          <h1 className="hero__title gold-gradient-text">LaDanza</h1>
 
           {/* Ambient Radial Golden Bloom */}
           <div className="hero__ambient-glow" aria-hidden="true" />

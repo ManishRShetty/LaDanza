@@ -11,7 +11,7 @@ export default function Nav({ ready = true }) {
   return (
     <nav className={`nav${scrolled ? ' is-scrolled' : ''}${ready ? ' nav--ready' : ''}`}>
       <a href="#hero" className="nav__logo">
-        <span className="nav__logo-text gold-gradient-text">Novera</span>
+        <span className="nav__logo-text gold-gradient-text">LaDanza</span>
         <span className="nav__logo-star" aria-hidden="true">✦</span>
       </a>
 

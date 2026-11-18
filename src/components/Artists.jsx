@@ -2,55 +2,64 @@ import { useState } from 'react'
 import RevealUp from './RevealUp'
 import '../styles/artists.css'
 
-// ── The Single Performing Band & its Member Artists ──
-const bandInfo = {
-  name: 'THE VELVET SYNDICATE',
-  tagline: 'OFFICIAL HEADLINING BAND',
-  genre: 'Alternative Rock • Neo-Fusion • Symphony',
+// ── LaDanza Headlining Superstars ──
+const lineupInfo = {
+  eyebrow: 'A FICTIONAL MEGA-CONCERT EXPERIENCE',
+  title: 'THE HEADLINERS',
+  tagline: '5 GLOBAL ICONS • ONE UNFORGETTABLE ARENA NIGHT',
 }
 
-const bandMembers = [
+const artistsData = [
   {
     id: 1,
-    name: 'Kabir Sen',
-    role: 'Lead Vocals & Frontman',
-    instrument: 'Vocals',
-    bio: 'Commanding frontman known for an expansive 4-octave vocal range, raw emotional stage storytelling, and soaring arena rock anthems.',
-    img: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80',
+    name: 'The Weeknd',
+    role: 'Global Pop & Synthwave Visionary',
+    genre: 'Synthwave • Dark R&B • Pop',
+    bio: 'Four-time Grammy-winning icon behind After Hours and Dawn FM, headlining with cinematic falsettos, thunderous retro synth basslines, and stadium-shaking anthems like "Blinding Lights" and "Starboy".',
+    img: '/images/artists/the-weeknd.jpg',
     number: '01',
   },
   {
     id: 2,
-    name: 'Aarav Mehta',
-    role: 'Lead Guitar & Backing Vocals',
-    instrument: 'Lead Guitar',
-    bio: 'Virtuoso guitarist crafting atmospheric soundscapes and explosive solos, seamlessly fusing progressive rock riffs with intricate acoustic melodies.',
-    img: 'https://images.unsplash.com/photo-1525201548942-d8732f6617a0?w=800&auto=format&fit=crop&q=80',
+    name: 'Linkin Park',
+    role: 'Alternative Rock Pioneers',
+    genre: 'Nu-Metal • Hybrid Rock • Symphonic',
+    bio: 'The multi-platinum arena legends behind Hybrid Theory and Meteora, unleashing electrifying new energy with colossal guitar riffs, soaring dual vocals, and timeless anthems like "In the End" and "Numb".',
+    img: '/images/artists/linkin-park.jpg',
     number: '02',
   },
   {
     id: 3,
-    name: 'Rhea Kapoor',
-    role: 'Bass Guitar & Synthesizers',
-    instrument: 'Bass & Synth',
-    bio: 'The sonic architect of the band, driving visceral low-end grooves and hypnotic modular synth textures that define their massive wall of sound.',
-    img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80',
+    name: 'Kendrick Lamar',
+    role: 'Hip-Hop Luminary & Cultural Titan',
+    genre: 'Conscious Rap • Jazz-Fusion • Live Brass',
+    bio: 'Pulitzer Prize and 17-time Grammy-winning heavyweight, commanding the stage with razor-sharp lyrical mastery, cinematic stagecraft, and groundbreaking classics from DAMN. and good kid, m.A.A.d city.',
+    img: '/images/artists/kendrick-lamar.jpg',
     number: '03',
   },
   {
     id: 4,
-    name: 'Dev Malhotra',
-    role: 'Drums & Percussion',
-    instrument: 'Drums',
-    bio: 'Dynamic percussionist delivering stadium-shaking drum patterns, blending thunderous rock drive with subtle polyrhythmic swing.',
-    img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=800&auto=format&fit=crop&q=80',
+    name: 'Tame Impala',
+    role: 'Psychedelic Sound Architect',
+    genre: 'Psychedelic Rock • Synth Pop • Dreamscape',
+    bio: 'Kevin Parker’s visionary project weaving kaleidoscopic analog synths, hypnotic disco-rock drums, and lush reverb into an ethereal sensory journey with hits like "The Less I Know The Better".',
+    img: '/images/artists/tame-impala.jpg',
     number: '04',
+  },
+  {
+    id: 5,
+    name: 'Don Toliver',
+    role: 'Melodic Rap & Psychedelic Trap Phenom',
+    genre: 'Psychedelic Trap • Melodic Hip-Hop • R&B',
+    bio: 'Chart-topping Houston innovator revered for intoxicating vocal melodies, futuristic soundscapes, and hypnotic late-night anthems from HARDSTONE PSYCHO and Heaven Or Hell.',
+    img: '/images/artists/don-toliver.jpg',
+    number: '05',
   },
 ]
 
 export default function Artists() {
-  const [activeMemberIndex, setActiveMemberIndex] = useState(1) // Aarav Mehta default
-  const activeMember = bandMembers[activeMemberIndex]
+  const [activeMemberIndex, setActiveMemberIndex] = useState(0) // Default to The Weeknd
+  const activeMember = artistsData[activeMemberIndex]
 
   return (
     <section className="artists" id="artists">
@@ -59,16 +68,16 @@ export default function Artists() {
 
       <div className="artists__container">
         
-        {/* ── 1. BAND HEADER (Identity & Crest) ── */}
+        {/* ── 1. HEADLINER BANNER & CREST ── */}
         <RevealUp delay={0.1}>
           <div className="artists__header">
             <div className="artists__eyebrow-wrap">
               <span className="artists__line" />
-              <p className="artists__kicker">LIVE PERFORMANCE BY</p>
+              <p className="artists__kicker">{lineupInfo.eyebrow}</p>
               <span className="artists__line" />
             </div>
 
-            {/* Band Emblem Crest */}
+            {/* Radiant Golden Crest */}
             <div className="artists__emblem" aria-hidden="true">
               <svg viewBox="0 0 100 100" fill="none" className="artists__crest-svg">
                 <circle cx="50" cy="50" r="46" stroke="url(#crestGrad)" strokeWidth="1.5" strokeDasharray="3 3" />
@@ -86,28 +95,28 @@ export default function Artists() {
               </svg>
             </div>
 
-            {/* Band Name Typography */}
+            {/* Lineup Title Typography */}
             <h2 className="artists__band-name gold-gradient-text">
-              {bandInfo.name}
+              {lineupInfo.title}
             </h2>
 
             <p className="artists__band-tagline">
-              {bandInfo.tagline} &bull; {bandInfo.genre}
+              {lineupInfo.tagline}
             </p>
           </div>
         </RevealUp>
 
-        {/* ── 2. BAND MEMBERS LINEUP ── */}
+        {/* ── 2. 5 HEADLINING ACTS ROW ── */}
         <RevealUp delay={0.25}>
           <div className="artists__lineup-badge-wrap">
             <div className="artists__lineup-badge">
               <span className="artists__lineup-dot" />
-              <span>BAND LINEUP &bull; 4 ARTISTS</span>
+              <span>STELLAR LINEUP &bull; 5 HEADLINING ACTS</span>
             </div>
           </div>
 
-          <div className="artists__members-row" role="list" aria-label="Band Members">
-            {bandMembers.map((member, idx) => {
+          <div className="artists__members-row" role="list" aria-label="Headlining Artists">
+            {artistsData.map((member, idx) => {
               const isSelected = activeMemberIndex === idx
               return (
                 <div
@@ -142,7 +151,7 @@ export default function Artists() {
           </div>
         </RevealUp>
 
-        {/* ── 3. ACTIVE MEMBER SPOTLIGHT ── */}
+        {/* ── 3. ACTIVE HEADLINER SPOTLIGHT ── */}
         <RevealUp delay={0.4}>
           <div className="artist-spotlight" key={activeMember.id}>
             <div className="artist-spotlight__bar" />
@@ -150,7 +159,7 @@ export default function Artists() {
               {activeMember.name}
             </h3>
             <p className="artist-spotlight__role">
-              {activeMember.role} &bull; {activeMember.instrument}
+              {activeMember.role} &bull; {activeMember.genre}
             </p>
             <p className="artist-spotlight__bio">
               {activeMember.bio}

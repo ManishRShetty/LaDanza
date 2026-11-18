@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════
-   NOVERA — Single Performing Band & Members Lineup
-   Ultra-Luxury Editorial Concert Aesthetic
-   Zero Overlapping • Fluid Responsive Hierarchy
+   LADANZA — Fictional Mega-Concert Headliner Lineup
+   Featuring The Weeknd, Linkin Park, Kendrick Lamar,
+   Tame Impala, and Don Toliver.
    ═══════════════════════════════════════════════════ */
 
 .artists {
@@ -18,8 +18,8 @@
   top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 800px;
-  height: 450px;
+  width: 850px;
+  height: 480px;
   background: radial-gradient(
     ellipse at center,
     rgba(229, 179, 100, 0.08) 0%,
@@ -34,7 +34,7 @@
 .artists__container {
   position: relative;
   z-index: 2;
-  max-width: 1120px;
+  max-width: 1180px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -42,7 +42,7 @@
   text-align: center;
 }
 
-/* ── 1. BAND HEADER ──────────────────────────────── */
+/* ── 1. HEADLINER BANNER & CREST ─────────────────── */
 .artists__header {
   display: flex;
   flex-direction: column;
@@ -56,7 +56,7 @@
   justify-content: center;
   gap: 0.9rem;
   width: 100%;
-  max-width: 440px;
+  max-width: 480px;
   margin-bottom: 0.85rem;
 }
 
@@ -75,7 +75,7 @@
   font-family: var(--serif);
   font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.3em;
   color: #eed6aa;
   text-transform: uppercase;
   white-space: nowrap;
@@ -115,13 +115,13 @@
   font-family: var(--serif);
   font-size: 0.78rem;
   font-weight: 500;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.28em;
   color: #caa049;
   text-transform: uppercase;
   margin: 0;
 }
 
-/* ── 2. BAND MEMBERS LINEUP ──────────────────────── */
+/* ── 2. HEADLINERS ROW ───────────────────────────── */
 .artists__lineup-badge-wrap {
   margin-bottom: 2rem;
 }
@@ -150,22 +150,22 @@
   box-shadow: 0 0 8px #e5b364;
 }
 
-/* 4 Member Silhouette Figures Row */
+/* 5 Headliners Row */
 .artists__members-row {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 1.6rem;
+  gap: 1.25rem;
   width: 100%;
-  max-width: 1040px;
+  max-width: 1160px;
   margin-bottom: 3rem;
 }
 
-/* Individual Artist Card (No hard box, silhouette presentation) */
+/* Individual Artist Silhouette Card */
 .artist-card {
   position: relative;
   flex: 1 1 0;
-  max-width: 235px;
+  max-width: 215px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -182,7 +182,7 @@
 .artist-card__figure {
   position: relative;
   width: 100%;
-  height: clamp(210px, 25vw, 300px);
+  height: clamp(210px, 22vw, 290px);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -194,7 +194,7 @@
   object-fit: cover;
   object-position: center top;
   border-radius: 20px 20px 0 0;
-  /* Smooth Paper-Cut Silhouette Gradient Mask: bottom fades out seamlessly into stage */
+  /* Smooth Paper-Cut Silhouette Gradient Mask */
   -webkit-mask-image: linear-gradient(180deg, black 65%, transparent 100%);
   mask-image: linear-gradient(180deg, black 65%, transparent 100%);
   /* Sleek Monochrome Silhouette by default */
@@ -251,9 +251,9 @@
 .artist-card__tag {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   margin-top: 0.85rem;
-  padding: 0.35rem 0.95rem;
+  padding: 0.35rem 0.85rem;
   background: rgba(18, 10, 5, 0.75);
   border: 1px solid rgba(229, 179, 100, 0.22);
   border-radius: 9999px;
@@ -277,18 +277,18 @@
 
 .artist-card__name {
   font-family: var(--serif);
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   color: #f5ede4;
   white-space: nowrap;
 }
 
-/* ── 3. ACTIVE MEMBER SPOTLIGHT ──────────────────── */
+/* ── 3. ACTIVE HEADLINER SPOTLIGHT ───────────────── */
 .artist-spotlight {
   text-align: center;
-  max-width: 660px;
-  min-height: 150px;
+  max-width: 680px;
+  min-height: 155px;
   padding: 0 1rem;
   animation: spotlightFade 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -315,7 +315,7 @@
 
 .artist-spotlight__name {
   font-family: var(--serif);
-  font-size: clamp(1.9rem, 4.2vw, 2.7rem);
+  font-size: clamp(2rem, 4.4vw, 2.9rem);
   font-weight: 700;
   letter-spacing: 0.04em;
   margin: 0 0 0.35rem;
@@ -324,7 +324,7 @@
 
 .artist-spotlight__role {
   font-family: var(--serif);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.25em;
   color: var(--accent);
@@ -340,8 +340,18 @@
 }
 
 /* ══════════════════════════════════════════════════
-   MOBILE / RESPONSIVE (max-width: 680px)
+   RESPONSIVE DESIGN
    ══════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .artists__members-row {
+    gap: 0.9rem;
+  }
+
+  .artist-card__name {
+    font-size: 0.78rem;
+  }
+}
+
 @media (max-width: 680px) {
   .artists {
     padding: 5rem 1rem 4.5rem;
@@ -355,6 +365,13 @@
     margin-bottom: 2rem;
   }
 
+  /* 5th headliner centered in the 3rd row */
+  .artist-card:nth-child(5) {
+    grid-column: span 2;
+    max-width: 175px;
+    margin: 0 auto;
+  }
+
   .artist-card__figure {
     height: 165px;
   }
@@ -364,11 +381,11 @@
   }
 
   .artist-spotlight {
-    min-height: 130px;
+    min-height: 140px;
   }
 
   .artist-spotlight__name {
-    font-size: 1.65rem;
+    font-size: 1.7rem;
   }
 
   .artist-spotlight__bio {

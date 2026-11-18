@@ -13,7 +13,7 @@ export default function Loader({ hidden }) {
 
       <div className="loader__content">
         <div className="loader__brand">
-          <span className="loader__title gold-gradient-text">Novera</span>
+          <span className="loader__title gold-gradient-text">LaDanza</span>
           <span className="loader__star" aria-hidden="true">✦</span>
         </div>
 

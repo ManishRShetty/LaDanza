@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="footer__inner">
         <RevealUp delay={0.1}>
           <div className="footer__brand">
-            <h2 className="footer__logo">Novera</h2>
+            <h2 className="footer__logo">LaDanza</h2>
             <p className="footer__tagline">A Live Concert Experience</p>
           </div>
         </RevealUp>
@@ -39,7 +39,7 @@ export default function Footer() {
                 <li><a href="#">Instagram</a></li>
                 <li><a href="#">Twitter / X</a></li>
                 <li><a href="#">YouTube</a></li>
-                <li><a href="#">contact@novera.live</a></li>
+                <li><a href="#">contact@ladanza.live</a></li>
               </ul>
             </div>
           </div>
@@ -47,7 +47,7 @@ export default function Footer() {
 
         <RevealUp delay={0.4}>
           <div className="footer__bottom">
-            <p>&copy; 2026 NOVERA. All rights reserved.</p>
+            <p>&copy; 2026 LADANZA. All rights reserved.</p>
             <div className="footer__credit">
               <p>Developed for <strong>Student Council</strong> by <strong>Nexus SIT</strong></p>
               <div className="footer__devs">
