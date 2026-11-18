@@ -38,7 +38,7 @@ export default function Artists() {
   return (
     <section className="section artists" id="artists">
       <div className="section__inner">
-        <RevealUp className="section__kicker">THE LINEUP</RevealUp>
+        <RevealUp className="section__kicker">The Lineup</RevealUp>
         <RevealUp as="h2" className="section__title">Meet the Artists</RevealUp>
 
         <div className="artist-grid">

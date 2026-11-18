@@ -23,10 +23,11 @@
 }
 
 .footer__tagline {
-  font-size: .85rem;
-  color: var(--text-dim);
-  margin-top: .3rem;
-  letter-spacing: .08em;
+  font-family: var(--script);
+  font-size: 1.5rem;
+  color: var(--accent);
+  margin-top: .1rem;
+  letter-spacing: .02em;
 }
 
 .footer__columns {

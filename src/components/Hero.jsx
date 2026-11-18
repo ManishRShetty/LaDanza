@@ -13,7 +13,7 @@ export default function Hero() {
     }
   }, [])
 
-  const letters = 'NOVERA'.split('')
+  const letters = 'Novera'.split('')
 
   return (
     <section className="hero" id="hero" ref={sectionRef}>
@@ -28,7 +28,7 @@ export default function Hero() {
 
       <div className="hero__content">
         <RevealUp delay={0}>
-          <p className="hero__eyebrow">A LIVE CONCERT EXPERIENCE</p>
+          <p className="hero__eyebrow">A Live Concert Experience</p>
         </RevealUp>
 
         <h1 className="hero__title">

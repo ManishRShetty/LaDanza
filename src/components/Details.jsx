@@ -12,7 +12,7 @@ export default function Details() {
   return (
     <section className="section details" id="details">
       <div className="section__inner">
-        <RevealUp className="section__kicker">THE DETAILS</RevealUp>
+        <RevealUp className="section__kicker">The Details</RevealUp>
         <RevealUp as="h2" className="section__title">
           Everything You Need to Know
         </RevealUp>

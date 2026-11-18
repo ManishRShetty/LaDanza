@@ -35,7 +35,7 @@ export default function Rules() {
     <section className="story story--rules" id="rules">
       <div className="story__sticky">
         <div className="story__center">
-          <RevealUp className="story__kicker">BEFORE YOU ARRIVE</RevealUp>
+          <RevealUp className="story__kicker">Before You Arrive</RevealUp>
           <RevealUp as="h2" className="story__heading">
             Rules &amp; Regulations
           </RevealUp>

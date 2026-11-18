@@ -7,7 +7,7 @@ export default function StorySection() {
     <section className="story" id="story-intro">
       <div className="story__sticky">
         <div className="story__center">
-          <RevealUp className="story__kicker">THE EXPERIENCE</RevealUp>
+          <RevealUp className="story__kicker">The Experience</RevealUp>
           <RevealUp as="h2" className="story__heading">
             One Stage. Infinite Energy.
           </RevealUp>
