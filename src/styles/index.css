@@ -12,6 +12,14 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: 'Moduley';
+  src: url('/fonts/moduley.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --bg:       #0a0a0a;
   --bg-card:  #111111;
@@ -25,7 +33,7 @@
   --white:    #ffffff;
   --font:     'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --serif:    'Times New Roman', Times, Georgia, serif;
-  --script:   'Edwardian Script ITC', 'ITC Edwardian Script', 'Edwardian Script', 'Pinyon Script', 'Great Vibes', cursive;
+  --script:   'Moduley', cursive;
   --ease:     cubic-bezier(.22, 1, .36, 1);
   --radius:   12px;
 }
@@ -117,14 +125,13 @@ ul { list-style: none; }
 }
 
 .section__kicker {
-  font-family: var(--script);
-  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-  font-weight: 400;
-  letter-spacing: .02em;
+  font-family: var(--serif);
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .25em;
   color: var(--accent);
-  margin-bottom: .25rem;
-  text-transform: none;
-  line-height: 1.1;
+  margin-bottom: .75rem;
+  text-transform: uppercase;
 }
 
 .section__title {

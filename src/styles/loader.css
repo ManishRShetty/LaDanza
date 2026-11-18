@@ -22,9 +22,9 @@
 }
 
 .loader__letter {
-  font-family: var(--serif);
-  font-size: clamp(2rem, 8vw, 5rem);
-  font-weight: 700;
+  font-family: var(--script);
+  font-size: clamp(3rem, 12vw, 6rem);
+  font-weight: 400;
   color: var(--accent);
   opacity: 0;
   transform: translateY(30px);

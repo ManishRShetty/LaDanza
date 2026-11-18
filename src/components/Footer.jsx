@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="footer" id="footer">
       <div className="footer__inner">
         <div className="footer__brand">
-          <h2 className="footer__logo">NOVERA</h2>
+          <h2 className="footer__logo">Novera</h2>
           <p className="footer__tagline">A Live Concert Experience</p>
         </div>
 

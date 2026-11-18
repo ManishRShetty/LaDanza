@@ -24,7 +24,7 @@ export default function App() {
       <Nav />
       <ProgressBar />
       <Hero />
-      <StorySection />
+      {/* <StorySection /> */}
       <Artists />
       <Rules />
       <Details />

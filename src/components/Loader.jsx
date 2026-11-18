@@ -4,7 +4,7 @@ export default function Loader({ hidden }) {
   return (
     <div className={`loader${hidden ? ' is-hidden' : ''}`} aria-hidden="true">
       <div className="loader__inner">
-        {'NOVERA'.split('').map((letter, i) => (
+        {'Novera'.split('').map((letter, i) => (
           <span
             key={i}
             className="loader__letter"

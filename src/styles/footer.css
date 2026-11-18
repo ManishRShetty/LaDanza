@@ -15,19 +15,21 @@
 }
 
 .footer__logo {
-  font-family: var(--serif);
-  font-size: 2rem;
-  font-weight: 700;
+  font-family: var(--script);
+  font-size: 3rem;
+  font-weight: 400;
   color: var(--accent);
-  letter-spacing: .06em;
+  letter-spacing: .02em;
+  line-height: 1;
 }
 
 .footer__tagline {
-  font-family: var(--script);
-  font-size: 1.5rem;
-  color: var(--accent);
-  margin-top: .1rem;
-  letter-spacing: .02em;
+  font-family: var(--serif);
+  font-size: .85rem;
+  color: var(--text-dim);
+  margin-top: .4rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
 }
 
 .footer__columns {

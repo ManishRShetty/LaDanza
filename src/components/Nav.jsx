@@ -10,7 +10,7 @@ export default function Nav() {
 
   return (
     <nav className={`nav${scrolled ? ' is-scrolled' : ''}`}>
-      <a href="#hero" className="nav__logo">NOVERA</a>
+      <a href="#hero" className="nav__logo">Novera</a>
 
       <button
         className={`nav__toggle${open ? ' is-open' : ''}`}

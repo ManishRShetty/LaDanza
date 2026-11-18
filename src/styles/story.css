@@ -20,14 +20,13 @@
 }
 
 .story__kicker {
-  font-family: var(--script);
-  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-  font-weight: 400;
-  letter-spacing: .02em;
+  font-family: var(--serif);
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .25em;
   color: var(--accent);
-  margin-bottom: .25rem;
-  text-transform: none;
-  line-height: 1.1;
+  margin-bottom: .75rem;
+  text-transform: uppercase;
 }
 
 .story__heading {
