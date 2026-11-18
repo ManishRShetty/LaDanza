@@ -2,14 +2,14 @@ import { useState } from 'react'
 import useScrollProgress from '../hooks/useScrollProgress'
 import '../styles/nav.css'
 
-export default function Nav() {
+export default function Nav({ ready = true }) {
   const [open, setOpen] = useState(false)
   const { scrolled } = useScrollProgress(60)
 
   const handleLinkClick = () => setOpen(false)
 
   return (
-    <nav className={`nav${scrolled ? ' is-scrolled' : ''}`}>
+    <nav className={`nav${scrolled ? ' is-scrolled' : ''}${ready ? ' nav--ready' : ''}`}>
       <a href="#hero" className="nav__logo">
         <span className="nav__logo-text gold-gradient-text">Novera</span>
         <span className="nav__logo-star" aria-hidden="true">✦</span>

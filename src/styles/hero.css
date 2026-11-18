@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════
    NOVERA — Hero Section
-   Warm Amber Stage Glow, Golden Orbit & Star Flourish
+   Apple-Style Slow Blurred-Out Cinematic Reveal
    ═══════════════════════════════════════════════════ */
 
 .hero {
@@ -19,6 +19,17 @@
   position: absolute;
   inset: 0;
   z-index: 0;
+  filter: blur(28px) brightness(0.5);
+  transform: scale(1.14);
+  transition:
+    filter 2.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 3.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: filter, transform;
+}
+
+.hero--ready .hero__bg {
+  filter: blur(0px) brightness(0.9);
+  transform: scale(1);
 }
 
 .hero__img {
@@ -26,13 +37,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center 30%;
-  transform: scale(1.08);
-  transition: transform 9s cubic-bezier(0.25, 1, 0.5, 1);
-  filter: contrast(1.1) brightness(0.9);
-}
-
-.hero.is-visible .hero__img {
-  transform: scale(1);
+  filter: contrast(1.1) brightness(0.95);
 }
 
 .hero__overlay {
@@ -40,7 +45,7 @@
   inset: 0;
   background: radial-gradient(
       ellipse at 50% 15%,
-      rgba(245, 180, 80, 0.18) 0%,
+      rgba(245, 180, 80, 0.22) 0%,
       transparent 65%
     ),
     linear-gradient(
@@ -72,7 +77,7 @@
     rgba(255, 205, 110, 0.16) 185deg,
     transparent 200deg
   );
-  filter: blur(14px);
+  filter: blur(16px);
   opacity: 0.85;
 }
 
@@ -102,12 +107,25 @@
   opacity: 0.65;
 }
 
-/* ── Golden Corner Waves (Guilloché) ──────────── */
+/* ── Golden Corner Waves (Slow Blur Float-In) ─── */
 .hero__waves {
   position: absolute;
   pointer-events: none;
   z-index: 2;
-  filter: drop-shadow(0 0 10px rgba(229, 179, 100, 0.3));
+  filter: blur(20px) drop-shadow(0 0 10px rgba(229, 179, 100, 0));
+  opacity: 0;
+  transform: scale(0.92);
+  transition:
+    filter 2.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s,
+    opacity 2.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s,
+    transform 2.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
+  will-change: filter, opacity, transform;
+}
+
+.hero--ready .hero__waves {
+  filter: blur(0px) drop-shadow(0 0 10px rgba(229, 179, 100, 0.35));
+  opacity: 1;
+  transform: scale(1);
 }
 
 .hero__waves--top {
@@ -135,6 +153,46 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* ── Apple-Style Staged Slow Blur-In System ────── */
+.hero__blur-stage {
+  opacity: 0;
+  filter: blur(32px) brightness(1.6);
+  transform: translateY(22px) scale(1.04);
+  transition:
+    opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 2.0s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 2.0s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, filter, transform;
+}
+
+.hero--ready .hero__blur-stage {
+  opacity: 1;
+  filter: blur(0px) brightness(1);
+  transform: translateY(0) scale(1);
+}
+
+/* Stage Stagger Delays */
+.hero__blur-stage--1 {
+  transition-delay: 0.15s;
+}
+
+.hero__blur-stage--2 {
+  transition-duration: 2.3s;
+  transition-delay: 0.4s;
+}
+
+.hero__blur-stage--3 {
+  transition-delay: 0.75s;
+}
+
+.hero__blur-stage--4 {
+  transition-delay: 1.05s;
+}
+
+.hero__blur-stage--5 {
+  transition-delay: 1.4s;
 }
 
 /* ── Eyebrow with Lines ────────────────────────── */
@@ -186,7 +244,7 @@
   line-height: 0.95;
   letter-spacing: 0.01em;
   margin: 0;
-  filter: drop-shadow(0 2px 28px rgba(229, 179, 100, 0.45));
+  filter: drop-shadow(0 2px 30px rgba(229, 179, 100, 0.45));
   position: relative;
   z-index: 2;
   user-select: none;
@@ -194,20 +252,27 @@
 
 .hero__ambient-glow {
   position: absolute;
-  width: 75%;
-  height: 75%;
+  width: 80%;
+  height: 80%;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0.7);
   background: radial-gradient(
     circle,
-    rgba(240, 185, 90, 0.35) 0%,
-    rgba(200, 130, 40, 0.12) 45%,
+    rgba(240, 185, 90, 0.38) 0%,
+    rgba(200, 130, 40, 0.14) 45%,
     transparent 72%
   );
-  filter: blur(35px);
+  filter: blur(40px);
   pointer-events: none;
   z-index: 1;
+  opacity: 0;
+  transition: opacity 2.4s cubic-bezier(0.16, 1, 0.3, 1) 0.5s, transform 2.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+}
+
+.hero--ready .hero__ambient-glow {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .hero__orbit-svg {
@@ -218,7 +283,42 @@
   pointer-events: none;
   z-index: 3;
   overflow: visible;
-  filter: drop-shadow(0 0 12px rgba(229, 179, 100, 0.6));
+  filter: drop-shadow(0 0 14px rgba(229, 179, 100, 0.65));
+}
+
+/* Sweeping SVG Orbit Drawing Animation */
+.hero__orbit-path {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  transition: stroke-dashoffset 2.4s cubic-bezier(0.16, 1, 0.3, 1) 0.55s;
+}
+
+.hero--ready .hero__orbit-path {
+  stroke-dashoffset: 0;
+}
+
+/* Star Sparkle Flash */
+.hero__star-burst {
+  opacity: 0;
+  transform-origin: center;
+  transform: scale(0);
+  filter: blur(14px);
+  transition:
+    opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1) 1.5s,
+    transform 1.3s cubic-bezier(0.34, 1.56, 0.64, 1) 1.5s,
+    filter 1.2s ease 1.5s;
+}
+
+.hero--ready .hero__star-burst--primary {
+  opacity: 1;
+  transform: translate(476px, 92px) scale(1.15);
+  filter: blur(0px);
+}
+
+.hero--ready .hero__star-burst--secondary {
+  opacity: 0.9;
+  transform: translate(62px, 175px) scale(0.65);
+  filter: blur(0px);
 }
 
 /* ── Subtitle Pillars ─────────────────────────── */
@@ -266,7 +366,7 @@
     inset 0 0 16px rgba(229, 163, 62, 0.22);
   cursor: pointer;
   text-decoration: none;
-  transition: transform 0.35s var(--ease), box-shadow 0.35s, background 0.35s;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s, background 0.4s;
 }
 
 .hero__btn-pass:hover {
@@ -309,6 +409,12 @@
   border-radius: 9999px;
   box-shadow: 0 0 14px 4px rgba(245, 180, 80, 0.95);
   pointer-events: none;
+  animation: flareBreathe 3s ease-in-out infinite alternate;
+}
+
+@keyframes flareBreathe {
+  0% { opacity: 0.75; transform: translateX(-50%) scaleX(0.85); }
+  100% { opacity: 1; transform: translateX(-50%) scaleX(1.15); box-shadow: 0 0 18px 5px rgba(245, 190, 90, 1); }
 }
 
 /* ── Scroll Indicator ─────────────────────────── */

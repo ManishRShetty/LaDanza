@@ -12,18 +12,28 @@ import Footer from './components/Footer'
 
 export default function App() {
   const [loaded, setLoaded] = useState(false)
+  const [heroReady, setHeroReady] = useState(false)
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoaded(true), 1400)
-    return () => clearTimeout(timer)
+    // Stage 1: Apple-style slow loader entrance
+    const loadTimer = setTimeout(() => {
+      setLoaded(true)
+      // Stage 2: Staggered slow blurred-out hero reveal begins as loader dissolves
+      const heroTimer = setTimeout(() => {
+        setHeroReady(true)
+      }, 350)
+      return () => clearTimeout(heroTimer)
+    }, 1900)
+
+    return () => clearTimeout(loadTimer)
   }, [])
 
   return (
     <>
       <Loader hidden={loaded} />
-      <Nav />
+      <Nav ready={heroReady} />
       <ProgressBar />
-      <Hero />
+      <Hero ready={heroReady} />
       {/* <StorySection /> */}
       <Artists />
       <Rules />

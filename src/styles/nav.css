@@ -9,7 +9,24 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.25rem 1.75rem;
-  transition: background 0.4s var(--ease), backdrop-filter 0.4s, padding 0.4s, border-color 0.4s;
+  opacity: 0;
+  filter: blur(16px);
+  transform: translateY(-12px);
+  transition:
+    opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s,
+    filter 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s,
+    transform 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s,
+    background 0.4s var(--ease),
+    backdrop-filter 0.4s,
+    padding 0.4s,
+    border-color 0.4s;
+  will-change: opacity, filter, transform;
+}
+
+.nav--ready {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0);
 }
 
 .nav.is-scrolled {

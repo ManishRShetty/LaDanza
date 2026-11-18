@@ -1,36 +1,143 @@
-/* ── Loader ────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════
+   NOVERA — Apple-Style Cinematic Slow Blur Preloader
+   ═══════════════════════════════════════════════════ */
+
 .loader {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: var(--bg);
+  background: #050302;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity .6s var(--ease), visibility .6s;
+  overflow: hidden;
+  transition:
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 1.4s;
+  will-change: opacity, filter, transform;
 }
 
 .loader.is-hidden {
   opacity: 0;
+  filter: blur(35px);
+  transform: scale(1.06);
   visibility: hidden;
   pointer-events: none;
 }
 
-.loader__inner {
+/* ── Ambient Radial Golden Bloom ──────────────── */
+.loader__bloom {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(229, 179, 100, 0.22) 0%,
+    rgba(180, 110, 30, 0.08) 50%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+  animation: loaderBloomPulse 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes loaderBloomPulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.2); opacity: 1; }
+}
+
+/* ── Content Container with Slow Blur Emergence ─ */
+.loader__content {
+  position: relative;
+  z-index: 2;
   display: flex;
-  gap: 4px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: loaderContentIn 1.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: filter, transform, opacity;
 }
 
-.loader__letter {
+@keyframes loaderContentIn {
+  0% {
+    opacity: 0;
+    filter: blur(28px) brightness(1.8);
+    transform: scale(1.1) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px) brightness(1);
+    transform: scale(1) translateY(0);
+  }
+}
+
+.loader__brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  margin-bottom: 1.5rem;
+}
+
+.loader__title {
   font-family: var(--script);
-  font-size: clamp(3rem, 12vw, 6rem);
+  font-size: clamp(3.5rem, 14vw, 7rem);
   font-weight: 400;
-  color: var(--accent);
-  opacity: 0;
-  transform: translateY(30px);
-  animation: loaderIn .5s var(--ease) forwards;
+  line-height: 1;
+  filter: drop-shadow(0 0 25px rgba(229, 179, 100, 0.5));
 }
 
-@keyframes loaderIn {
-  to { opacity: 1; transform: translateY(0); }
+.loader__star {
+  font-size: clamp(1rem, 3.5vw, 1.6rem);
+  color: #fff6db;
+  text-shadow: 0 0 16px rgba(245, 196, 110, 0.95);
+  animation: starPulse 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes starPulse {
+  0% { transform: scale(0.85); opacity: 0.7; }
+  100% { transform: scale(1.25); opacity: 1; }
+}
+
+/* ── Hairline Loading Bar ─────────────────────── */
+.loader__line-wrap {
+  width: 140px;
+  height: 1px;
+  background: rgba(229, 179, 100, 0.15);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.loader__line-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(
+    90deg,
+    rgba(202, 152, 70, 0.4),
+    #ffffff 50%,
+    rgba(229, 179, 100, 0.8)
+  );
+  box-shadow: 0 0 10px rgba(245, 196, 110, 0.85);
+  animation: loaderLineFill 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes loaderLineFill {
+  0% { width: 0%; }
+  60% { width: 75%; }
+  100% { width: 100%; }
+}
+
+.loader__tagline {
+  font-family: var(--serif);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.38em;
+  color: rgba(229, 179, 100, 0.7);
+  text-transform: uppercase;
 }

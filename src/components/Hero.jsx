@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import RevealUp from './RevealUp'
 import '../styles/hero.css'
 
-export default function Hero() {
+export default function Hero({ ready = true }) {
   const sectionRef = useRef(null)
 
   useEffect(() => {
@@ -13,7 +13,11 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="hero" id="hero" ref={sectionRef}>
+    <section
+      className={`hero${ready ? ' hero--ready' : ''}`}
+      id="hero"
+      ref={sectionRef}
+    >
       {/* Background Concert Crowd & Overlays */}
       <div className="hero__bg">
         <img
@@ -22,7 +26,7 @@ export default function Hero() {
           className="hero__img"
         />
         <div className="hero__overlay" />
-        
+
         {/* Overhead Spotlights */}
         <div className="hero__spotlights" aria-hidden="true">
           <div className="hero__spotlight hero__spotlight--left" />
@@ -79,108 +83,101 @@ export default function Hero() {
 
       <div className="hero__content">
         {/* Eyebrow with gold horizontal framing lines */}
-        <RevealUp delay={0.1}>
-          <div className="hero__eyebrow-container">
-            <span className="hero__eyebrow-line" />
-            <p className="hero__eyebrow">A LIVE STUDENT EXPERIENCE</p>
-            <span className="hero__eyebrow-line" />
-          </div>
-        </RevealUp>
+        <div className="hero__eyebrow-container hero__blur-stage hero__blur-stage--1">
+          <span className="hero__eyebrow-line" />
+          <p className="hero__eyebrow">A LIVE STUDENT EXPERIENCE</p>
+          <span className="hero__eyebrow-line" />
+        </div>
 
         {/* Center Title with Golden Swoosh Orbit & Sparkle Stars */}
-        <RevealUp delay={0.25}>
-          <div className="hero__title-container">
-            <h1 className="hero__title gold-gradient-text">Novera</h1>
+        <div className="hero__title-container hero__blur-stage hero__blur-stage--2">
+          <h1 className="hero__title gold-gradient-text">Novera</h1>
 
-            {/* Ambient Radial Golden Bloom */}
-            <div className="hero__ambient-glow" aria-hidden="true" />
+          {/* Ambient Radial Golden Bloom */}
+          <div className="hero__ambient-glow" aria-hidden="true" />
 
-            {/* Sweeping Golden Orbit with 4-Point Star Sparkle */}
-            <svg
-              className="hero__orbit-svg"
-              viewBox="0 0 520 260"
-              fill="none"
-              aria-hidden="true"
-            >
-              <defs>
-                <linearGradient id="orbitGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#ca9846" stopOpacity="0.2" />
-                  <stop offset="30%" stopColor="#e5b364" stopOpacity="0.85" />
-                  <stop offset="65%" stopColor="#fff5db" stopOpacity="1" />
-                  <stop offset="100%" stopColor="#e5b364" stopOpacity="0.75" />
-                </linearGradient>
+          {/* Sweeping Golden Orbit with 4-Point Star Sparkle */}
+          <svg
+            className="hero__orbit-svg"
+            viewBox="0 0 520 260"
+            fill="none"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="orbitGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#ca9846" stopOpacity="0.2" />
+                <stop offset="30%" stopColor="#e5b364" stopOpacity="0.85" />
+                <stop offset="65%" stopColor="#fff5db" stopOpacity="1" />
+                <stop offset="100%" stopColor="#e5b364" stopOpacity="0.75" />
+              </linearGradient>
 
-                <filter id="starGlow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
+              <filter id="starGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
 
-              {/* Main swoosh loop framing Novera */}
+            {/* Main swoosh loop framing Novera */}
+            <path
+              className="hero__orbit-path"
+              d="M 50 190 C 15 130, 70 85, 175 165 C 295 255, 455 200, 480 110 C 495 55, 430 75, 370 95"
+              stroke="url(#orbitGrad)"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+            />
+
+            {/* Radiant 4-point star on the top-right orbit peak */}
+            <g className="hero__star-burst hero__star-burst--primary" transform="translate(476, 92)" filter="url(#starGlow)">
               <path
-                d="M 50 190 C 15 130, 70 85, 175 165 C 295 255, 455 200, 480 110 C 495 55, 430 75, 370 95"
-                stroke="url(#orbitGrad)"
-                strokeWidth="2.4"
-                strokeLinecap="round"
+                d="M 0,-18 Q 1.5,-3 16,0 Q 1.5,3 0,18 Q -1.5,3 -16,0 Q -1.5,-3 0,-18 Z"
+                fill="#ffffff"
               />
+              <circle cx="0" cy="0" r="3.2" fill="#ffe7a8" />
+            </g>
 
-              {/* Radiant 4-point star on the top-right orbit peak */}
-              <g transform="translate(476, 92) scale(1.15)" filter="url(#starGlow)">
-                <path
-                  d="M 0,-18 Q 1.5,-3 16,0 Q 1.5,3 0,18 Q -1.5,3 -16,0 Q -1.5,-3 0,-18 Z"
-                  fill="#ffffff"
-                />
-                <circle cx="0" cy="0" r="3.2" fill="#ffe7a8" />
-              </g>
-
-              {/* Secondary delicate sparkle on bottom left */}
-              <g transform="translate(62, 175) scale(0.65)" filter="url(#starGlow)">
-                <path
-                  d="M 0,-14 Q 1,-2 12,0 Q 1,2 0,14 Q -1,2 -12,0 Q -1,-2 0,-14 Z"
-                  fill="#ffe6a8"
-                />
-              </g>
-            </svg>
-          </div>
-        </RevealUp>
+            {/* Secondary delicate sparkle on bottom left */}
+            <g className="hero__star-burst hero__star-burst--secondary" transform="translate(62, 175)" filter="url(#starGlow)">
+              <path
+                d="M 0,-14 Q 1,-2 12,0 Q 1,2 0,14 Q -1,2 -12,0 Q -1,-2 0,-14 Z"
+                fill="#ffe6a8"
+              />
+            </g>
+          </svg>
+        </div>
 
         {/* Subtitle Pillars: DREAM • CONNECT • CELEBRATE */}
-        <RevealUp delay={0.4}>
-          <p className="hero__pillars">
-            DREAM <span className="hero__pillar-dot">&bull;</span> CONNECT{' '}
-            <span className="hero__pillar-dot">&bull;</span> CELEBRATE
-          </p>
-        </RevealUp>
+        <p className="hero__pillars hero__blur-stage hero__blur-stage--3">
+          DREAM <span className="hero__pillar-dot">&bull;</span> CONNECT{' '}
+          <span className="hero__pillar-dot">&bull;</span> CELEBRATE
+        </p>
 
         {/* Luminous Glowing Capsule Button: GET YOUR PASS > */}
-        <RevealUp delay={0.55}>
-          <div className="hero__btn-wrapper">
-            <a href="#tickets" className="hero__btn-pass">
-              <span className="hero__btn-label">GET YOUR PASS</span>
-              <svg
-                className="hero__btn-chevron"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <polyline points="9 18 15 12 9 6" />
-              </svg>
-              {/* Bottom Lens Flare Point */}
-              <span className="hero__btn-flare" aria-hidden="true" />
-            </a>
-          </div>
-        </RevealUp>
+        <div className="hero__btn-wrapper hero__blur-stage hero__blur-stage--4">
+          <a href="#tickets" className="hero__btn-pass">
+            <span className="hero__btn-label">GET YOUR PASS</span>
+            <svg
+              className="hero__btn-chevron"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+            {/* Bottom Lens Flare Point */}
+            <span className="hero__btn-flare" aria-hidden="true" />
+          </a>
+        </div>
       </div>
 
       {/* Bottom Scroll Cue with Slender Down Arrow */}
-      <div className="hero__scroll-cue" aria-hidden="true">
+      <div className="hero__scroll-cue hero__blur-stage hero__blur-stage--5" aria-hidden="true">
         <span>SCROLL</span>
         <svg
           className="hero__scroll-arrow"
