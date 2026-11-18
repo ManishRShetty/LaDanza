@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: var(--bg);
+  background: transparent;
 }
 
 /* ── Background & Concert Imagery ─────────────── */
@@ -19,12 +19,7 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  filter: blur(28px) brightness(0.5);
-  transform: scale(1.14);
-  transition:
-    filter 2.6s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 3.2s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: filter, transform;
+  display: none;
 }
 
 .hero--ready .hero__bg {
@@ -107,25 +102,9 @@
   opacity: 0.65;
 }
 
-/* ── Golden Corner Waves (Slow Blur Float-In) ─── */
+/* ── Golden Corner Waves ─── */
 .hero__waves {
-  position: absolute;
-  pointer-events: none;
-  z-index: 2;
-  filter: blur(20px) drop-shadow(0 0 10px rgba(229, 179, 100, 0));
-  opacity: 0;
-  transform: scale(0.92);
-  transition:
-    filter 2.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s,
-    opacity 2.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s,
-    transform 2.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
-  will-change: filter, opacity, transform;
-}
-
-.hero--ready .hero__waves {
-  filter: blur(0px) drop-shadow(0 0 10px rgba(229, 179, 100, 0.35));
-  opacity: 1;
-  transform: scale(1);
+  display: none;
 }
 
 .hero__waves--top {

@@ -1,0 +1,111 @@
+/* ── Global Fixed Concert Stage Background ────────── */
+.fixed-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--bg, #080503);
+}
+
+.fixed-bg__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: contrast(1.1) brightness(0.85);
+  transform: scale(1.02);
+}
+
+.fixed-bg__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse at 50% 15%,
+      rgba(245, 180, 80, 0.2) 0%,
+      transparent 65%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(8, 5, 3, 0.6) 0%,
+      rgba(20, 11, 5, 0.6) 45%,
+      rgba(8, 5, 3, 0.95) 100%
+    );
+}
+
+/* ── Overhead Golden Spotlights ────────────────── */
+.fixed-bg__spotlights {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.fixed-bg__spotlight {
+  position: absolute;
+  top: -10%;
+  width: 280px;
+  height: 85%;
+  background: conic-gradient(
+    from 180deg at 50% 0%,
+    transparent 160deg,
+    rgba(255, 205, 110, 0.16) 175deg,
+    rgba(255, 225, 150, 0.28) 180deg,
+    rgba(255, 205, 110, 0.16) 185deg,
+    transparent 200deg
+  );
+  filter: blur(16px);
+  opacity: 0.85;
+}
+
+.fixed-bg__spotlight--center {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  background: conic-gradient(
+    from 180deg at 50% 0%,
+    transparent 155deg,
+    rgba(255, 220, 130, 0.22) 175deg,
+    rgba(255, 240, 180, 0.35) 180deg,
+    rgba(255, 220, 130, 0.22) 185deg,
+    transparent 205deg
+  );
+}
+
+.fixed-bg__spotlight--left {
+  left: 20%;
+  transform: rotate(-12deg);
+  opacity: 0.65;
+}
+
+.fixed-bg__spotlight--right {
+  right: 20%;
+  transform: rotate(12deg);
+  opacity: 0.65;
+}
+
+/* ── Golden Corner Waves ───────────────────────── */
+.fixed-bg__waves {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  filter: drop-shadow(0 0 10px rgba(229, 179, 100, 0.35));
+}
+
+.fixed-bg__waves--top {
+  top: -10px;
+  left: -10px;
+  width: min(340px, 48vw);
+  height: auto;
+}
+
+.fixed-bg__waves--bottom {
+  bottom: -10px;
+  right: -10px;
+  width: min(340px, 48vw);
+  height: auto;
+}

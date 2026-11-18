@@ -1,84 +1,431 @@
-/* ── Artist Showcase ────────────────────────────── */
-.artists__gallery-wrapper {
-  margin-bottom: 3.5rem;
+/* ═══════════════════════════════════════════════════
+   NOVERA — Sticky Artist Scrollytelling
+   Phase 1: Center Logo -> Phase 2: Logo moves below +
+   4 B&W Artists with Hover-to-Color & Spotlight Name
+   ═══════════════════════════════════════════════════ */
+
+.artists-scroller {
   position: relative;
+  height: 240vh;
+  background: transparent;
 }
 
-/* ── Artist Bio Cards ──────────────────────────── */
-.artist-bios-grid {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: 1fr;
-}
-
-.artist-bio-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.75rem;
-  transition: transform 0.4s var(--ease), border-color 0.4s, box-shadow 0.4s;
-  height: 100%;
+.artists-sticky-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 1.5rem;
 }
 
-.artist-bio-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(229, 179, 100, 0.45);
-  box-shadow: 0 16px 40px rgba(229, 163, 62, 0.16);
-}
-
-.artist-bio-card__header {
+/* ── PHASE 1: Brand Logo Anchor ───────────────── */
+.artist-brand-anchor {
+  position: absolute;
+  left: 50%;
   display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 5;
+  transition:
+    top 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: top, transform, opacity, filter;
+  pointer-events: none;
 }
 
-.artist-bio-card__num {
-  font-family: var(--serif);
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--accent);
-  line-height: 1;
+/* Initial Centered Position */
+.artist-brand-anchor.is-centered {
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  filter: blur(0px);
 }
 
-.artist-bio-card__name {
-  font-family: var(--serif);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--white);
+/* Placed Below Position on Scroll */
+.artist-brand-anchor.is-placed-below {
+  top: 93%;
+  transform: translate(-50%, -50%) scale(0.62);
+  opacity: 0.85;
+  filter: blur(0px);
+}
+
+.artist-brand-anchor__eyebrow-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  max-width: 380px;
   margin-bottom: 0.25rem;
 }
 
-.artist-bio-card__role {
-  font-size: 0.72rem;
+.artist-brand-anchor__line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(229, 179, 100, 0.6) 50%,
+    transparent 100%
+  );
+}
+
+.artist-brand-anchor__kicker {
+  font-family: var(--serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  color: #eed6aa;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.artist-brand-anchor__logo-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.25rem 0;
+  padding: 0 1.5rem;
+}
+
+.artist-brand-anchor__title {
+  font-family: var(--script);
+  font-size: clamp(4.2rem, 16vw, 9rem);
+  font-weight: 400;
+  line-height: 0.95;
+  margin: 0;
+  filter: drop-shadow(0 2px 28px rgba(229, 179, 100, 0.5));
+  position: relative;
+  z-index: 2;
+}
+
+.artist-brand-anchor__orbit-svg {
+  position: absolute;
+  inset: -38% -22%;
+  width: 144%;
+  height: 176%;
+  pointer-events: none;
+  z-index: 3;
+  overflow: visible;
+  filter: drop-shadow(0 0 12px rgba(229, 179, 100, 0.65));
+}
+
+.artist-brand-anchor__subtitle {
+  font-family: var(--serif);
+  font-size: 0.75rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
-  color: var(--accent);
+  letter-spacing: 0.35em;
+  color: #caa049;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+
+/* ── PHASE 2: 4 Artists Showcase Container ────── */
+.artists-content {
+  position: relative;
+  z-index: 6;
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -2rem;
+  transition:
+    opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, filter, transform;
+}
+
+.artists-content.is-hidden {
+  opacity: 0;
+  filter: blur(28px) brightness(1.5);
+  transform: translateY(45px) scale(0.96);
+  pointer-events: none;
+}
+
+.artists-content.is-visible {
+  opacity: 1;
+  filter: blur(0px) brightness(1);
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Top pill */
+.artists-header-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  background: rgba(30, 16, 7, 0.65);
+  border: 1px solid rgba(229, 179, 100, 0.25);
+  border-radius: 9999px;
+  font-family: var(--serif);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: #eed4a2;
+  margin-bottom: 1.5rem;
   text-transform: uppercase;
 }
 
-.artist-bio-card__text {
-  font-size: 0.9rem;
-  line-height: 1.65;
+.artists-header-pill__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px #e5b364;
+}
+
+/* ── 4 Black & White Artist Photo Cards Row ───── */
+.artists-photos-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 1040px;
+  margin-bottom: 1.75rem;
+}
+
+.artist-photo-card {
+  position: relative;
+  flex: 1 1 0;
+  max-width: 235px;
+  aspect-ratio: 3 / 4;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(229, 179, 100, 0.22);
+  background: #120a05;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.45s ease,
+    box-shadow 0.45s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.artist-photo-card__frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.artist-photo-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* INITIAL: Sleek Black and White */
+  filter: grayscale(1) brightness(0.82) contrast(1.15);
+  transition:
+    filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1.02);
+}
+
+.artist-photo-card__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 50%,
+    rgba(8, 5, 3, 0.8) 100%
+  );
+}
+
+.artist-photo-card__badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-family: var(--serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #caa049;
+  background: rgba(8, 5, 3, 0.65);
+  padding: 0.15rem 0.45rem;
+  border-radius: 6px;
+  border: 1px solid rgba(229, 179, 100, 0.2);
+}
+
+.artist-photo-card__name-tag {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.artist-photo-card__name-tag span {
+  font-family: var(--serif);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #f5ede4;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+/* ── HOVER / ACTIVE STATE: Vibrant Warm Color & Lift ── */
+.artist-photo-card:hover,
+.artist-photo-card.is-active,
+.artist-photo-card:focus-visible {
+  transform: translateY(-8px) scale(1.03);
+  border-color: rgba(229, 179, 100, 0.85);
+  box-shadow: 0 18px 45px rgba(229, 163, 62, 0.32);
+}
+
+.artist-photo-card:hover .artist-photo-card__img,
+.artist-photo-card.is-active .artist-photo-card__img,
+.artist-photo-card:focus-visible .artist-photo-card__img {
+  /* HOVER: Blooms into full, vibrant concert color! */
+  filter: grayscale(0) brightness(1.05) contrast(1.02);
+  transform: scale(1.06);
+}
+
+/* ── Active Artist Spotlight Below ────────────── */
+.artist-spotlight {
+  text-align: center;
+  max-width: 620px;
+  padding: 0 1rem;
+  animation: spotlightFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes spotlightFadeIn {
+  0% {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+.artist-spotlight__bar {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #caa049, transparent);
+  margin: 0 auto 0.75rem;
+}
+
+.artist-spotlight__name {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.3rem;
+  line-height: 1.1;
+}
+
+.artist-spotlight__role {
+  font-family: var(--serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin: 0 0 0.65rem;
+}
+
+.artist-spotlight__bio {
+  font-size: 0.92rem;
+  line-height: 1.6;
   color: var(--text-dim);
-  margin-top: auto;
+  margin: 0;
 }
 
-@media (min-width: 640px) {
-  .artist-bios-grid {
+/* ── Phase Indicator Dots ─────────────────────── */
+.artists-phase-indicators {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  z-index: 10;
+}
+
+.phase-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(229, 179, 100, 0.3);
+  transition: all 0.4s ease;
+}
+
+.phase-dot--active {
+  background: #e5b364;
+  height: 18px;
+  border-radius: 999px;
+  box-shadow: 0 0 10px #e5b364;
+}
+
+/* ══════════════════════════════════════════════════
+   MOBILE / RESPONSIVE (max-width: 680px)
+   ══════════════════════════════════════════════════ */
+@media (max-width: 680px) {
+  .artists-scroller {
+    height: 210vh;
+  }
+
+  .artists-sticky-stage {
+    padding: 1rem 0.85rem;
+  }
+
+  .artists-photos-row {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .artist-bios-grid {
-    grid-template-columns: repeat(3, 1fr);
+    gap: 0.65rem;
+    max-width: 360px;
+    margin-bottom: 1rem;
   }
 
-  .artist-bio-card:nth-child(4),
-  .artist-bio-card:nth-child(5) {
-    grid-column: span 1;
+  .artist-photo-card {
+    max-width: none;
+    aspect-ratio: 3 / 3.8;
+  }
+
+  .artist-brand-anchor.is-placed-below {
+    top: 96%;
+    transform: translate(-50%, -50%) scale(0.52);
+  }
+
+  .artist-spotlight__name {
+    font-size: 1.55rem;
+  }
+
+  .artist-spotlight__bio {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .artists-phase-indicators {
+    right: 0.65rem;
   }
 }

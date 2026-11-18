@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import FixedBackground from './components/FixedBackground'
 import Loader from './components/Loader'
 import Nav from './components/Nav'
 import ProgressBar from './components/ProgressBar'
@@ -30,6 +31,7 @@ export default function App() {
 
   return (
     <>
+      <FixedBackground />
       <Loader hidden={loaded} />
       <Nav ready={heroReady} />
       <ProgressBar />
