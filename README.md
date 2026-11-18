@@ -68,15 +68,32 @@ LaDanza brings together 5 global icons across distinct musical dimensions onto o
 - Interactive tier selection, live quantity selector (1–6 passes), real-time total calculator, and animated checkout reservation button.
 
 ### 7. Smooth Fading Cross-Fade Audio Engine (`AudioPlayer` & `AudioContext`)
-- **Ambient Party Music**: Plays the party background music with a floating glassmorphic controller and animated golden equalizer waves (`||||`).
-- **Individual Artist Audio Playback**: Clicking any headliner card smoothly cross-fades into their iconic preview track:
-  - **The Weeknd**: "Starboy (feat. Daft Punk)"
-  - **Linkin Park**: "In The End"
-  - **Kendrick Lamar**: "HUMBLE."
-  - **Tame Impala**: "New Person, Same Old Mistakes"
-  - **Eminem**: "Without Me"
-- **850ms Smooth Linear Interpolation**: Seamless, continuous volume cross-fade between tracks without harsh audio clipping.
-- Floating controller allows one-tap toggling between artist previews and the ambient party vibe.
+- **Default Tomorrowland Mainstage Anthem**: Plays the festival hymn *"Mammoth"* by Dimitri Vegas & Like Mike, MOGUAI on first user gesture with a floating glassmorphic controller and animated golden equalizer waves (`||||`).
+- **Hover & Click Artist Audio Playback**:
+  - **Hovering** over any headliner's card or name pill smoothly cross-fades into their song!
+  - **Leaving hover** smoothly cross-fades back to the Tomorrowland anthem.
+  - **Clicking** an artist card locks/pins their song to keep playing.
+  - Roster:
+    - **The Weeknd**: "Starboy (feat. Daft Punk)"
+    - **Linkin Park**: "In The End"
+    - **Kendrick Lamar**: "HUMBLE."
+    - **Tame Impala**: "New Person, Same Old Mistakes"
+    - **Eminem**: "Without Me"
+- **680ms Smooth Linear Interpolation**: Seamless, continuous volume cross-fade between tracks without harsh cuts or clicks.
+
+### 7. Smooth Fading Cross-Fade Audio Engine (`AudioPlayer` & `AudioContext`)
+- **Default Tomorrowland Mainstage Anthem**: Plays the festival hymn *"Mammoth"* by Dimitri Vegas & Like Mike, MOGUAI on first user gesture with a floating glassmorphic controller and animated golden equalizer waves (`||||`).
+- **Hover & Click Artist Audio Playback**:
+  - **Hovering** over any headliner's card or name pill smoothly cross-fades into their song!
+  - **Leaving hover** smoothly cross-fades back to the Tomorrowland anthem.
+  - **Clicking** an artist card locks/pins their song to keep playing.
+  - Roster:
+    - **The Weeknd**: "Starboy (feat. Daft Punk)"
+    - **Linkin Park**: "In The End"
+    - **Kendrick Lamar**: "HUMBLE."
+    - **Tame Impala**: "New Person, Same Old Mistakes"
+    - **Eminem**: "Without Me"
+- **680ms Smooth Linear Interpolation**: Seamless, continuous volume cross-fade between tracks without harsh cuts or clicks.
 
 ---
 

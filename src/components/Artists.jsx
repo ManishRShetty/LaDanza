@@ -19,7 +19,7 @@ const artistsData = [
     bio: 'Four-time Grammy-winning icon behind After Hours and Dawn FM, headlining with cinematic falsettos, thunderous retro synth basslines, and stadium-shaking anthems like "Blinding Lights" and "Starboy".',
     img: '/images/artists/the-weeknd.jpg',
     number: '01',
-    songTitle: 'Starboy',
+    songTitle: 'Starboy (feat. Daft Punk)',
   },
   {
     id: 2,
@@ -66,11 +66,27 @@ const artistsData = [
 export default function Artists() {
   const [activeMemberIndex, setActiveMemberIndex] = useState(0) // Default to The Weeknd
   const activeMember = artistsData[activeMemberIndex]
-  const { isPlaying, activeArtistId, playArtistTrack } = useAudio()
+  const {
+    isPlaying,
+    activeArtistId,
+    pinnedArtistId,
+    previewArtistOnHover,
+    leaveArtistPreview,
+    clickArtistTrack,
+  } = useAudio()
 
-  const handleArtistClick = (idx, memberId) => {
+  const handleCardHover = (idx, memberId) => {
     setActiveMemberIndex(idx)
-    playArtistTrack(memberId)
+    previewArtistOnHover(memberId)
+  }
+
+  const handleCardLeave = () => {
+    leaveArtistPreview()
+  }
+
+  const handleCardClick = (idx, memberId) => {
+    setActiveMemberIndex(idx)
+    clickArtistTrack(memberId)
   }
 
   return (
@@ -79,7 +95,7 @@ export default function Artists() {
       <div className="artists__ambient" aria-hidden="true" />
 
       <div className="artists__container">
-        
+
         {/* ── 1. HEADLINER BANNER & CREST ── */}
         <RevealUp delay={0.1}>
           <div className="artists__header">
@@ -123,26 +139,34 @@ export default function Artists() {
           <div className="artists__lineup-badge-wrap">
             <div className="artists__lineup-badge">
               <span className="artists__lineup-dot" />
-              <span>STELLAR LINEUP &bull; 5 HEADLINING ACTS &bull; CLICK TO HEAR MUSIC</span>
+              <span>HOVER OVER AN ARTIST TO PLAY SONG &bull; CLICK TO LOCK</span>
             </div>
           </div>
 
-          <div className="artists__members-row" role="list" aria-label="Headlining Artists">
+          <div
+            className="artists__members-row"
+            role="list"
+            aria-label="Headlining Artists"
+            onMouseLeave={handleCardLeave}
+          >
             {artistsData.map((member, idx) => {
               const isSelected = activeMemberIndex === idx
               const isTrackPlaying = activeArtistId === member.id && isPlaying
+              const isLocked = pinnedArtistId === member.id
 
               return (
                 <div
                   key={member.id}
-                  className={`artist-card${isSelected ? ' is-active' : ''}${isTrackPlaying ? ' is-audio-playing' : ''}`}
-                  onMouseEnter={() => setActiveMemberIndex(idx)}
-                  onClick={() => handleArtistClick(idx, member.id)}
+                  className={`artist-card${isSelected ? ' is-active' : ''}${isTrackPlaying ? ' is-audio-playing' : ''}${isLocked ? ' is-locked' : ''}`}
+                  onMouseEnter={() => handleCardHover(idx, member.id)}
+                  onMouseLeave={handleCardLeave}
+                  onClick={() => handleCardClick(idx, member.id)}
                   role="listitem"
                   tabIndex={0}
-                  onFocus={() => setActiveMemberIndex(idx)}
-                  aria-label={`${member.name} - ${member.role}. Click to play track.`}
-                  title={`Click to listen to ${member.name}`}
+                  onFocus={() => handleCardHover(idx, member.id)}
+                  onBlur={handleCardLeave}
+                  aria-label={`${member.name} - ${member.role}. Hover or click to play ${member.songTitle}.`}
+                  title={`Hover or click to play "${member.songTitle}" by ${member.name}`}
                 >
                   {/* Silhouette Figure */}
                   <div className="artist-card__figure">
@@ -160,7 +184,7 @@ export default function Artists() {
                         <span className="artist-card__eq-bar" />
                         <span className="artist-card__eq-bar" />
                         <span className="artist-card__eq-bar" />
-                        <span>PLAYING</span>
+                        <span>{isLocked ? 'LOCKED' : 'PLAYING'}</span>
                       </div>
                     )}
                   </div>
@@ -195,7 +219,7 @@ export default function Artists() {
               <button
                 type="button"
                 className={`artist-spotlight__audio-btn${activeArtistId === activeMember.id && isPlaying ? ' is-playing' : ''}`}
-                onClick={() => playArtistTrack(activeMember.id)}
+                onClick={() => clickArtistTrack(activeMember.id)}
                 aria-label={`Play preview for ${activeMember.name}`}
               >
                 <span className="artist-spotlight__audio-icon">
@@ -203,10 +227,10 @@ export default function Artists() {
                 </span>
                 <span className="artist-spotlight__audio-text">
                   {activeArtistId === activeMember.id && isPlaying
-                    ? `Playing "${activeMember.songTitle}" (Click to Pause)`
-                    : `Preview "${activeMember.songTitle}" — ${activeMember.name}`}
+                    ? `Playing "${activeMember.songTitle}" (Click to Return to Tomorrowland Vibe)`
+                    : `Play "${activeMember.songTitle}" — ${activeMember.name}`}
                 </span>
-                <span className="artist-spotlight__fade-tag">Smooth Cross-Fade</span>
+                <span className="artist-spotlight__fade-tag">Smooth Fading</span>
               </button>
             </div>
           </div>

@@ -50,10 +50,10 @@ export default function AudioPlayer() {
         {/* Track Info Marquee / Label */}
         <div className="audio-pill__info">
           <span className="audio-pill__status">
-            {isPlaying ? (activeArtistId ? 'ARTIST PREVIEW' : 'PARTY AMBIENCE') : 'PARTY MUSIC'}
+            {isPlaying ? (activeArtistId ? 'ARTIST PREVIEW' : 'TOMORROWLAND VIBE') : 'PARTY SOUND'}
           </span>
           <span className="audio-pill__track gold-gradient-text">
-            {isPlaying ? `${currentTrackInfo.artist} — ${currentTrackInfo.title}` : 'Tap to Play Party Sound'}
+            {isPlaying ? `${currentTrackInfo.artist} — ${currentTrackInfo.title}` : 'Tap to Play Tomorrowland Vibe'}
           </span>
         </div>
       </button>
@@ -64,10 +64,10 @@ export default function AudioPlayer() {
           type="button"
           className="audio-pill__switch-ambient"
           onClick={playAmbient}
-          title="Switch back to Party Ambience"
-          aria-label="Switch back to Party Ambience"
+          title="Return to Tomorrowland Anthem"
+          aria-label="Return to Tomorrowland Anthem"
         >
-          <span>Return to Party Vibe ↺</span>
+          <span>Tomorrowland Vibe ↺</span>
         </button>
       )}
     </div>

@@ -3,6 +3,12 @@ import { createContext, useContext, useState, useRef, useEffect, useCallback } f
 const AudioContext = createContext(null)
 
 const AMBIENT_SRC = '/audio/ambient-party.mp3'
+const AMBIENT_INFO = {
+  id: 'ambient',
+  title: 'Mammoth (Tomorrowland Anthem)',
+  artist: 'Dimitri Vegas & Like Mike',
+}
+
 const ARTIST_TRACKS = {
   1: { id: 'the-weeknd', src: '/audio/the-weeknd.mp3', title: 'Starboy (feat. Daft Punk)', artist: 'The Weeknd' },
   2: { id: 'linkin-park', src: '/audio/linkin-park.mp3', title: 'In the End', artist: 'Linkin Park' },
@@ -13,44 +19,52 @@ const ARTIST_TRACKS = {
 
 export function AudioProvider({ children }) {
   const [isPlaying, setIsPlaying] = useState(false)
-  const [currentTrackInfo, setCurrentTrackInfo] = useState({
-    id: 'ambient',
-    title: 'Party Ambience',
-    artist: 'Swedish House Mafia',
-  })
+  const [currentTrackInfo, setCurrentTrackInfo] = useState(AMBIENT_INFO)
   const [activeArtistId, setActiveArtistId] = useState(null)
+  const [pinnedArtistId, setPinnedArtistId] = useState(null)
 
-  // Two audio elements for cross-fading channel A and channel B
+  const isPlayingRef = useRef(false)
+  const pinnedArtistIdRef = useRef(null)
+  const hoverTimeoutRef = useRef(null)
+
+  // Keep refs synchronized
+  useEffect(() => {
+    isPlayingRef.current = isPlaying
+  }, [isPlaying])
+
+  useEffect(() => {
+    pinnedArtistIdRef.current = pinnedArtistId
+  }, [pinnedArtistId])
+
+  // Dual HTML5 audio channels for seamless linear volume cross-fades
   const activeChannelRef = useRef('A')
   const audioARef = useRef(null)
   const audioBRef = useRef(null)
   const fadeAnimRef = useRef(null)
 
   useEffect(() => {
-    audioARef.current = new Audio()
-    audioBRef.current = new Audio()
+    const a = new Audio()
+    const b = new Audio()
 
-    audioARef.current.loop = true
-    audioBRef.current.loop = true
+    a.loop = true
+    b.loop = true
+    a.volume = 0
+    b.volume = 0
 
-    audioARef.current.volume = 0
-    audioBRef.current.volume = 0
+    audioARef.current = a
+    audioBRef.current = b
 
     return () => {
-      if (audioARef.current) {
-        audioARef.current.pause()
-        audioARef.current.src = ''
-      }
-      if (audioBRef.current) {
-        audioBRef.current.pause()
-        audioBRef.current.src = ''
-      }
+      a.pause()
+      a.src = ''
+      b.pause()
+      b.src = ''
     }
   }, [])
 
-  // Smooth Cross-Fade Engine (800ms linear ramp)
-  const crossFadeTo = useCallback((src, targetVol = 0.65, onFadeInStart) => {
-    const fadeDuration = 850
+  // Smooth Cross-Fade Engine (650ms smooth curve)
+  const crossFadeTo = useCallback((src, targetVol = 0.65) => {
+    const fadeDuration = 680
     const currentChannel = activeChannelRef.current
     const nextChannel = currentChannel === 'A' ? 'B' : 'A'
 
@@ -59,7 +73,6 @@ export function AudioProvider({ children }) {
 
     if (!currentAudio || !nextAudio) return
 
-    // Cancel any running fade animation
     if (fadeAnimRef.current) {
       cancelAnimationFrame(fadeAnimRef.current)
     }
@@ -67,7 +80,6 @@ export function AudioProvider({ children }) {
     const startCurrentVol = currentAudio.volume
     const startTime = performance.now()
 
-    // Setup incoming track
     nextAudio.src = src
     nextAudio.currentTime = 0
     nextAudio.volume = 0
@@ -77,14 +89,14 @@ export function AudioProvider({ children }) {
       playPromise
         .then(() => {
           setIsPlaying(true)
+          isPlayingRef.current = true
           activeChannelRef.current = nextChannel
-          if (onFadeInStart) onFadeInStart()
 
           const step = now => {
             const elapsed = now - startTime
             const progress = Math.min(elapsed / fadeDuration, 1)
 
-            // EaseInOut interpolation for smooth crossfade
+            // Smooth cubic ease-in-out
             const ease = progress < 0.5
               ? 2 * progress * progress
               : -1 + (4 - 2 * progress) * progress
@@ -112,21 +124,22 @@ export function AudioProvider({ children }) {
           fadeAnimRef.current = requestAnimationFrame(step)
         })
         .catch(err => {
-          console.warn('Audio playback prevented by browser:', err)
-          setIsPlaying(false)
+          console.warn('Audio playback waiting for user gesture:', err.message)
         })
     }
   }, [])
 
-  // Fade out and pause everything
+  // Fade out everything and stop
   const fadeOutAndStop = useCallback(() => {
-    const fadeDuration = 600
+    const fadeDuration = 550
     const currentChannel = activeChannelRef.current
     const currentAudio = currentChannel === 'A' ? audioARef.current : audioBRef.current
 
     if (!currentAudio || currentAudio.paused) {
       setIsPlaying(false)
+      isPlayingRef.current = false
       setActiveArtistId(null)
+      setPinnedArtistId(null)
       return
     }
 
@@ -148,59 +161,109 @@ export function AudioProvider({ children }) {
         currentAudio.pause()
         currentAudio.volume = 0
         setIsPlaying(false)
+        isPlayingRef.current = false
         setActiveArtistId(null)
+        setPinnedArtistId(null)
       }
     }
 
     fadeAnimRef.current = requestAnimationFrame(step)
   }, [])
 
-  // Play an individual artist's track with smooth fade
-  const playArtistTrack = useCallback((artistId) => {
-    const track = ARTIST_TRACKS[artistId]
-    if (!track) return
+  // Play Default Tomorrowland Party Music
+  const playAmbient = useCallback(() => {
+    setActiveArtistId(null)
+    setPinnedArtistId(null)
+    setCurrentTrackInfo(AMBIENT_INFO)
+    crossFadeTo(AMBIENT_SRC, 0.45)
+  }, [crossFadeTo])
 
-    // If already playing this artist, toggle mute/pause back to ambient
-    if (activeArtistId === artistId && isPlaying) {
-      // Fade back to ambient party music
-      setActiveArtistId(null)
-      setCurrentTrackInfo({
-        id: 'ambient',
-        title: 'Party Ambience',
-        artist: 'Swedish House Mafia',
-      })
-      crossFadeTo(AMBIENT_SRC, 0.35)
+  // Hover over an artist -> Smoothly preview their song (with 100ms debounce to prevent brush jumps)
+  const previewArtistOnHover = useCallback((artistId) => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current)
+    }
+
+    hoverTimeoutRef.current = setTimeout(() => {
+      const track = ARTIST_TRACKS[artistId]
+      if (!track) return
+
+      setActiveArtistId(artistId)
+      setCurrentTrackInfo(track)
+      crossFadeTo(track.src, 0.72)
+    }, 120)
+  }, [crossFadeTo])
+
+  // Mouse leaves artist card -> Return smoothly to default Tomorrowland music unless pinned
+  const leaveArtistPreview = useCallback(() => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current)
+    }
+
+    // Only return to ambient if user hasn't explicitly clicked/pinned an artist
+    if (!pinnedArtistIdRef.current) {
+      hoverTimeoutRef.current = setTimeout(() => {
+        playAmbient()
+      }, 180)
+    }
+  }, [playAmbient])
+
+  // Click on an artist -> Lock/pin their song or toggle
+  const clickArtistTrack = useCallback((artistId) => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current)
+    }
+
+    // If already pinned, unpin and return to Tomorrowland default
+    if (pinnedArtistId === artistId) {
+      setPinnedArtistId(null)
+      playAmbient()
       return
     }
 
+    const track = ARTIST_TRACKS[artistId]
+    if (!track) return
+
+    setPinnedArtistId(artistId)
     setActiveArtistId(artistId)
     setCurrentTrackInfo(track)
-    crossFadeTo(track.src, 0.72)
-  }, [activeArtistId, isPlaying, crossFadeTo])
+    crossFadeTo(track.src, 0.74)
+  }, [pinnedArtistId, playAmbient, crossFadeTo])
 
-  // Play Ambient Party Music with smooth fade
-  const playAmbient = useCallback(() => {
-    setActiveArtistId(null)
-    setCurrentTrackInfo({
-      id: 'ambient',
-      title: 'Party Ambience',
-      artist: 'Swedish House Mafia',
-    })
-    crossFadeTo(AMBIENT_SRC, 0.35)
-  }, [crossFadeTo])
-
-  // Toggle audio (Mute / Unmute global)
+  // Global toggle (Mute / Play)
   const toggleAudio = useCallback(() => {
     if (isPlaying) {
       fadeOutAndStop()
     } else {
-      if (activeArtistId && ARTIST_TRACKS[activeArtistId]) {
-        playArtistTrack(activeArtistId)
+      if (pinnedArtistId && ARTIST_TRACKS[pinnedArtistId]) {
+        clickArtistTrack(pinnedArtistId)
       } else {
         playAmbient()
       }
     }
-  }, [isPlaying, activeArtistId, fadeOutAndStop, playArtistTrack, playAmbient])
+  }, [isPlaying, pinnedArtistId, fadeOutAndStop, clickArtistTrack, playAmbient])
+
+  // Start Tomorrowland default audio on the very first user interaction anywhere
+  useEffect(() => {
+    const handleFirstGesture = () => {
+      if (!isPlayingRef.current) {
+        playAmbient()
+      }
+      window.removeEventListener('click', handleFirstGesture)
+      window.removeEventListener('keydown', handleFirstGesture)
+      window.removeEventListener('touchstart', handleFirstGesture)
+    }
+
+    window.addEventListener('click', handleFirstGesture, { once: true })
+    window.addEventListener('keydown', handleFirstGesture, { once: true })
+    window.addEventListener('touchstart', handleFirstGesture, { once: true })
+
+    return () => {
+      window.removeEventListener('click', handleFirstGesture)
+      window.removeEventListener('keydown', handleFirstGesture)
+      window.removeEventListener('touchstart', handleFirstGesture)
+    }
+  }, [playAmbient])
 
   return (
     <AudioContext.Provider
@@ -208,7 +271,10 @@ export function AudioProvider({ children }) {
         isPlaying,
         currentTrackInfo,
         activeArtistId,
-        playArtistTrack,
+        pinnedArtistId,
+        previewArtistOnHover,
+        leaveArtistPreview,
+        clickArtistTrack,
         playAmbient,
         toggleAudio,
       }}
