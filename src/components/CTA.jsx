@@ -4,15 +4,6 @@ import '../styles/cta.css'
 export default function CTA() {
   return (
     <section className="cta" id="tickets">
-      <div className="cta__bg">
-        <img
-          src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=1400&q=80"
-          alt="Concert celebration"
-          className="cta__img"
-        />
-        <div className="cta__overlay" />
-      </div>
-
       <div className="cta__content">
         <RevealUp delay={0.1}>
           <p className="cta__kicker">Don't Miss Out</p>
