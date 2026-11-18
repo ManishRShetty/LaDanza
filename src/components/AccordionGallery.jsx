@@ -4,11 +4,11 @@ import { gsap } from 'gsap';
 import './AccordionGallery.css';
 
 const DEFAULT_ITEMS = [
-  { image: 'https://picsum.photos/id/1015/900/1200', label: 'Canyon', link: '#' },
-  { image: 'https://picsum.photos/id/1018/900/1200', label: 'Ridgeline', link: '#' },
-  { image: 'https://picsum.photos/id/1039/900/1200', label: 'Falls', link: '#' },
-  { image: 'https://picsum.photos/id/1043/900/1200', label: 'Harbour', link: '#' },
-  { image: 'https://picsum.photos/id/1044/900/1200', label: 'Skyline', link: '#' }
+  { image: 'https://picsum.photos/id/1015/900/1200', label: 'Canyon' },
+  { image: 'https://picsum.photos/id/1018/900/1200', label: 'Ridgeline' },
+  { image: 'https://picsum.photos/id/1039/900/1200', label: 'Falls' },
+  { image: 'https://picsum.photos/id/1043/900/1200', label: 'Harbour' },
+  { image: 'https://picsum.photos/id/1044/900/1200', label: 'Skyline' }
 ];
 
 const AccordionGallery = ({
@@ -22,11 +22,11 @@ const AccordionGallery = ({
   radius = 16,
   expandRatio = 0.52,
   orientation = 'horizontal',
-  duration = 0.6,
+  duration = 0.5,
   ease = 'power3.out',
-  parallax = 0.5,
-  tilt = 8,
-  stagger = 0.06,
+  parallax = 0.35,
+  tilt = 6,
+  stagger = 0.04,
   trigger = 'hover',
   showLabels = true,
   grayscale = true,
@@ -41,7 +41,19 @@ const AccordionGallery = ({
   const firstRunRef = useRef(true);
   const mediaSizeRef = useRef(320);
 
-  const vertical = orientation === 'vertical';
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? window.innerWidth <= 640 : false
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 640);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const vertical = orientation === 'vertical' || isMobile;
   const count = items.length;
   const [active, setActive] = useState(Math.min(Math.max(defaultIndex, 0), count - 1));
 
@@ -71,13 +83,13 @@ const AccordionGallery = ({
         const text = textRefs.current[i];
 
         const rot = isActive ? 0 : i < active ? tilt : -tilt;
-        const rotProp = vertical ? { rotateX: -rot } : { rotateY: rot };
+        const rotProp = vertical ? { rotateX: rot * 0.4, rotateY: 0 } : { rotateY: rot, rotateX: 0 };
 
         tl.to(panel, { flexGrow: isActive ? grow : 1, ...rotProp, duration: dur, ease }, 0);
 
         if (media) {
           const drift = Math.max(-1.5, Math.min(1.5, active - i));
-          const shift = drift * parallax * mediaSize * 0.06;
+          const shift = drift * parallax * mediaSize * 0.05;
           const gray = grayscale ? (isActive ? 0 : 1) : 0;
           tl.to(
             media,
@@ -99,7 +111,7 @@ const AccordionGallery = ({
           if (isActive) {
             tl.to([bar, text], { opacity: 1, x: 0, duration: dur, ease, stagger: prefersReduced ? 0 : stagger }, 0);
           } else {
-            tl.to([bar, text], { opacity: 0, x: -14, duration: dur * 0.6, ease }, 0);
+            tl.to([bar, text], { opacity: 0, x: -10, duration: dur * 0.5, ease }, 0);
           }
         }
       });
@@ -155,14 +167,12 @@ const AccordionGallery = ({
   );
 
   const handleEnter = i => {
-    if (trigger === 'hover') setActive(i);
+    if (trigger === 'hover' && !isMobile) setActive(i);
   };
 
   const handleClick = (i, e) => {
-    if (i !== active) {
-      e.preventDefault();
-      setActive(i);
-    }
+    e.preventDefault();
+    setActive(i);
   };
 
   const handleKeyDown = (i, e) => {
@@ -185,21 +195,19 @@ const AccordionGallery = ({
         '--ag-text': textColor,
         '--ag-gap': `${gap}px`,
         '--ag-radius': `${radius}px`,
-        height: vertical ? `${Math.round(height * 1.6)}px` : `${height}px`
+        height: vertical ? `${Math.round(height * 1.15)}px` : `${height}px`
       }}
       role="list"
       aria-label="Image accordion gallery"
     >
       {items.map((item, i) => {
         const isActive = i === active;
-        const Tag = item.link ? 'a' : 'div';
         return (
-          <Tag
+          <div
             key={i}
             ref={el => (panelRefs.current[i] = el)}
             className={`ag-panel${isActive ? ' ag-panel--active' : ''}`}
             style={{ borderRadius: `${radius}px` }}
-            href={item.link || undefined}
             onClick={e => handleClick(i, e)}
             onMouseEnter={() => handleEnter(i)}
             onFocus={() => setActive(i)}
@@ -223,7 +231,7 @@ const AccordionGallery = ({
                 </span>
               </span>
             )}
-          </Tag>
+          </div>
         );
       })}
     </div>

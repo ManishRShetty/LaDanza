@@ -11,8 +11,9 @@
   gap: var(--ag-gap);
   width: 100%;
   max-width: 100%;
-  perspective: 1400px;
+  perspective: 1200px;
   perspective-origin: 50% 50%;
+  touch-action: pan-y;
 }
 
 .accordion-gallery--vertical {
@@ -37,12 +38,13 @@
   box-shadow: 0 10px 30px -18px rgba(0, 0, 0, 0.9);
   will-change: flex-grow, transform;
   -webkit-tap-highlight-color: transparent;
-  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  user-select: none;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .ag-panel--active {
-  border-color: rgba(229, 179, 100, 0.55);
-  box-shadow: 0 16px 40px -12px rgba(229, 163, 62, 0.25);
+  border-color: rgba(229, 179, 100, 0.65);
+  box-shadow: 0 16px 40px -12px rgba(229, 163, 62, 0.28);
 }
 
 .ag-panel:focus-visible {
@@ -56,6 +58,7 @@
   inset: 0;
   overflow: hidden;
   border-radius: inherit;
+  pointer-events: none;
 }
 
 .ag-panel__media {
@@ -68,11 +71,12 @@
   height: 100%;
   filter: grayscale(var(--ag-gray));
   will-change: transform, filter;
+  pointer-events: none;
 }
 
 .accordion-gallery--vertical .ag-panel__media {
   width: 100%;
-  height: var(--ag-media-size);
+  height: 100%;
 }
 
 .ag-panel__media img {
@@ -89,7 +93,7 @@
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(180deg, transparent 40%, rgba(8, 5, 3, 0.85) 100%),
+    linear-gradient(180deg, transparent 35%, rgba(8, 5, 3, 0.88) 100%),
     color-mix(in srgb, var(--ag-overlay) calc(var(--ag-dim, 0.35) * 100%), transparent);
 }
 
@@ -108,7 +112,7 @@
 .ag-panel__bar {
   flex: 0 0 auto;
   width: 3px;
-  height: 30px;
+  height: 28px;
   border-radius: 3px;
   background: var(--ag-accent);
   opacity: 0;
@@ -119,7 +123,7 @@
   color: var(--ag-text);
   font-family: var(--serif, 'Times New Roman', serif);
   font-weight: 600;
-  font-size: clamp(1.05rem, 1.5vw, 1.45rem);
+  font-size: clamp(1rem, 1.4vw, 1.35rem);
   letter-spacing: 0.04em;
   white-space: nowrap;
   overflow: hidden;
@@ -130,32 +134,22 @@
 
 @media (max-width: 640px) {
   .accordion-gallery {
-    flex-direction: column;
-    perspective: none;
-    height: 580px !important;
+    gap: 8px;
   }
   .ag-panel {
-    min-height: 72px;
-    transform: none !important;
-  }
-  .ag-panel--active {
-    min-height: 220px;
-  }
-  .accordion-gallery .ag-panel__media {
-    width: 100%;
-    height: 100%;
+    min-height: 52px;
   }
   .ag-panel__label {
-    left: 16px;
-    bottom: 16px;
-    right: 16px;
-    gap: 10px;
+    left: 14px;
+    bottom: 14px;
+    right: 14px;
+    gap: 8px;
   }
   .ag-panel__bar {
-    height: 22px;
+    height: 20px;
   }
   .ag-panel__text {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
   }
 }
 

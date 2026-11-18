@@ -38,8 +38,7 @@ const artists = [
 const galleryItems = artists.map(a => ({
   image: a.img,
   label: `${a.name}  —  ${a.role}`,
-  alt: a.name,
-  link: '#tickets'
+  alt: a.name
 }))
 
 export default function Artists() {
