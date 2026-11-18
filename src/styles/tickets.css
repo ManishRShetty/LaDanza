@@ -1,0 +1,544 @@
+/* ═══════════════════════════════════════════════════
+   LADANZA — Interactive Ticket Price Selection
+   Starting from ₹20,000 • Luxury Glassmorphic Tiers
+   ═══════════════════════════════════════════════════ */
+
+.tickets {
+  position: relative;
+  padding: 7.5rem 1.5rem 6.5rem;
+  background: transparent;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* Ambient Subtle Stage Glow */
+.tickets__ambient {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 520px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(229, 179, 100, 0.08) 0%,
+    rgba(229, 179, 100, 0.02) 45%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tickets__container {
+  position: relative;
+  z-index: 2;
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ── Section Header ──────────────────────────────── */
+.tickets__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.8rem;
+}
+
+.tickets__eyebrow-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  width: 100%;
+  max-width: 440px;
+  margin-bottom: 0.85rem;
+}
+
+.tickets__line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(229, 179, 100, 0.6) 50%,
+    transparent 100%
+  );
+}
+
+.tickets__kicker {
+  font-family: var(--serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  color: #eed6aa;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tickets__title {
+  font-family: var(--serif);
+  font-size: clamp(2.3rem, 5.5vw, 3.8rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  margin: 0 0 0.85rem;
+}
+
+/* Starting from ₹20,000 Pricing Badge */
+.tickets__pricing-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 1.25rem;
+  background: rgba(35, 18, 7, 0.8);
+  border: 1px solid rgba(229, 179, 100, 0.38);
+  border-radius: 9999px;
+  font-family: var(--serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #eed6aa;
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+  box-shadow: 0 0 16px rgba(229, 163, 62, 0.22);
+}
+
+.tickets__badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px #e5b364;
+  animation: badgeDotPulse 2s infinite ease-in-out;
+}
+
+@keyframes badgeDotPulse {
+  0%, 100% { opacity: 0.7; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.tickets__subtitle {
+  font-size: 0.96rem;
+  line-height: 1.65;
+  color: var(--text-dim);
+  max-width: 620px;
+  margin: 0;
+}
+
+/* ── 3 Ticket Tier Cards Grid ────────────────────── */
+.tickets__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1140px;
+  margin-bottom: 3rem;
+  align-items: stretch;
+}
+
+.ticket-card {
+  position: relative;
+  background: rgba(16, 9, 4, 0.75);
+  border: 1px solid rgba(229, 179, 100, 0.22);
+  border-radius: 20px;
+  padding: 2.4rem 1.8rem 2rem;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  backdrop-filter: blur(14px);
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease,
+    background 0.35s ease,
+    box-shadow 0.35s ease;
+  user-select: none;
+}
+
+.ticket-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(229, 179, 100, 0.55);
+  box-shadow: 0 16px 36px rgba(229, 163, 62, 0.18);
+}
+
+/* Selected State */
+.ticket-card.is-selected {
+  transform: translateY(-8px);
+  border-color: rgba(229, 179, 100, 0.95);
+  background: rgba(30, 16, 7, 0.88);
+  box-shadow:
+    0 0 32px rgba(229, 179, 100, 0.28),
+    inset 0 0 22px rgba(229, 179, 100, 0.08);
+}
+
+/* Most Popular Accent Card */
+.ticket-card.is-popular {
+  border-color: rgba(229, 179, 100, 0.45);
+}
+
+.ticket-card__badge {
+  position: absolute;
+  top: -12px;
+  right: 1.5rem;
+  padding: 0.25rem 0.85rem;
+  background: linear-gradient(135deg, #f5d696 0%, #ca9846 100%);
+  border-radius: 9999px;
+  font-family: var(--serif);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #080503;
+  text-transform: uppercase;
+  box-shadow: 0 4px 14px rgba(229, 179, 100, 0.4);
+}
+
+/* Card Header */
+.ticket-card__header {
+  margin-bottom: 1.4rem;
+}
+
+.ticket-card__type {
+  font-family: var(--serif);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.ticket-card__name {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f5ede4;
+  margin: 0 0 0.45rem;
+  letter-spacing: 0.02em;
+}
+
+.ticket-card__desc {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--text-dim);
+  margin: 0;
+  min-height: 42px;
+}
+
+/* Pricing Display */
+.ticket-card__price-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(229, 179, 100, 0.16);
+  border-bottom: 1px solid rgba(229, 179, 100, 0.16);
+  margin-bottom: 1.4rem;
+}
+
+.ticket-card__currency {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.ticket-card__amount {
+  font-family: var(--serif);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.ticket-card__freq {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+}
+
+/* Perks List */
+.ticket-card__perks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  flex-grow: 1;
+}
+
+.ticket-card__perk-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: #dfd5c9;
+}
+
+.ticket-card__check {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Card Button */
+.ticket-card__btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(30, 16, 7, 0.8);
+  border: 1px solid rgba(229, 179, 100, 0.3);
+  border-radius: 9999px;
+  font-family: var(--serif);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #eed6aa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ticket-card__btn:hover,
+.ticket-card.is-selected .ticket-card__btn {
+  background: linear-gradient(135deg, rgba(229, 179, 100, 0.22), rgba(200, 130, 40, 0.35));
+  border-color: rgba(229, 179, 100, 0.85);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(229, 163, 62, 0.25);
+}
+
+.ticket-card__btn.is-selected-btn {
+  background: linear-gradient(135deg, #f5d696 0%, #ca9846 100%);
+  border-color: transparent;
+  color: #080503;
+  font-weight: 700;
+}
+
+/* ── Interactive Checkout & Quantity Summary Bar ─── */
+.tickets__checkout-bar {
+  width: 100%;
+  max-width: 1040px;
+  background: rgba(22, 12, 5, 0.85);
+  border: 1px solid rgba(229, 179, 100, 0.38);
+  border-radius: 20px;
+  padding: 1.6rem 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(14px);
+  margin-bottom: 1.2rem;
+}
+
+.tickets__summary-col {
+  text-align: left;
+}
+
+.tickets__summary-label {
+  font-family: var(--serif);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.tickets__summary-tier {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 0.2rem;
+  line-height: 1.1;
+}
+
+.tickets__summary-sub {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+/* Quantity Control */
+.tickets__qty-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.tickets__qty-label {
+  font-family: var(--serif);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.tickets__qty-control {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: rgba(14, 8, 3, 0.9);
+  border: 1px solid rgba(229, 179, 100, 0.3);
+  border-radius: 9999px;
+  padding: 0.25rem 0.65rem;
+}
+
+.tickets__qty-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid rgba(229, 179, 100, 0.3);
+  color: var(--accent);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tickets__qty-btn:hover:not(:disabled) {
+  background: rgba(229, 179, 100, 0.25);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.tickets__qty-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.tickets__qty-number {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  min-width: 22px;
+  text-align: center;
+}
+
+/* Action / Total Column */
+.tickets__action-col {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+.tickets__total-wrap {
+  text-align: right;
+}
+
+.tickets__total-label {
+  font-family: var(--serif);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.tickets__total-amount {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.tickets__pass-btn-wrap {
+  margin: 0;
+}
+
+.tickets__btn-checkout {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.tickets__btn-checkout.is-booked {
+  background: linear-gradient(135deg, #38ef7d 0%, #11998e 100%);
+  border-color: #38ef7d;
+  color: #061e12;
+  box-shadow: 0 0 25px rgba(56, 239, 125, 0.5);
+}
+
+.tickets__security-note {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted, #9a8878);
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE DESIGN
+   ══════════════════════════════════════════════════ */
+@media (max-width: 960px) {
+  .tickets__grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+  }
+
+  .tickets__checkout-bar {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.4rem;
+    padding: 1.6rem 1.4rem;
+  }
+
+  .tickets__summary-col,
+  .tickets__total-wrap {
+    text-align: center;
+  }
+
+  .tickets__action-col {
+    flex-direction: column;
+    gap: 1.1rem;
+    width: 100%;
+  }
+
+  .tickets__pass-btn-wrap {
+    width: 100%;
+  }
+
+  .tickets__btn-checkout {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 680px) {
+  .tickets {
+    padding: 5rem 1rem 4.5rem;
+  }
+
+  .tickets__title {
+    font-size: 2.2rem;
+  }
+
+  .tickets__pricing-badge {
+    font-size: 0.65rem;
+    padding: 0.35rem 1rem;
+  }
+
+  .ticket-card {
+    padding: 2rem 1.4rem 1.6rem;
+  }
+
+  .ticket-card__amount {
+    font-size: 2rem;
+  }
+}

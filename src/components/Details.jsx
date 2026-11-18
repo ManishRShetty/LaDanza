@@ -3,8 +3,8 @@ import '../styles/details.css'
 
 const details = [
   { icon: '📅', title: 'Date', text: '18 — 19 December 2026\nGates open at 4:00 PM' },
-  { icon: '📍', title: 'Venue', text: 'Phoenix Arena\nWhitefield, Bangalore' },
-  { icon: '🎫', title: 'Tickets', text: 'General — ₹1,999\nVIP Pit — ₹4,999\nBackstage Pass — ₹9,999' },
+  { icon: '📍', title: 'Venue', text: 'Sir Manish Shetty Stadium\nMangalore, Karnataka' },
+  { icon: '🎫', title: 'Tickets', text: 'Starting from ₹20,000\nVIP Circle — ₹38,000\nDiamond Pass — ₹75,000' },
   { icon: '🅿️', title: 'Parking', text: 'Limited on-site parking.\nWe recommend public transit or ride-share.' },
 ]
 

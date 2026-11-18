@@ -4,7 +4,7 @@ export default function FixedBackground() {
   return (
     <div className="fixed-bg" aria-hidden="true">
       <img
-        src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1600&q=80"
+        src="/images/bg/concert-bg.jpg"
         alt=""
         className="fixed-bg__img"
       />

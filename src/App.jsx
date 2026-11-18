@@ -8,7 +8,7 @@ import StorySection from './components/StorySection'
 import Artists from './components/Artists'
 import Rules from './components/Rules'
 import Details from './components/Details'
-import CTA from './components/CTA'
+import Tickets from './components/Tickets'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -40,7 +40,7 @@ export default function App() {
       <Artists />
       <Rules />
       <Details />
-      <CTA />
+      <Tickets />
       <Footer />
     </>
   )

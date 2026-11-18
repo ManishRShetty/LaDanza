@@ -26,7 +26,7 @@ export default function StorySection() {
         <StoryStep>
           <p>
             Two nights. Five headliners. Thousands of hearts beating as one.
-            This December, Bangalore transforms into the epicentre of live music.
+            This December, Mangalore transforms into the epicentre of live music.
           </p>
         </StoryStep>
 

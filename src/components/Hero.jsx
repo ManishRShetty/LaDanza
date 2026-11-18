@@ -21,7 +21,7 @@ export default function Hero({ ready = true }) {
       {/* Background Concert Crowd & Overlays */}
       <div className="hero__bg">
         <img
-          src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1400&q=80"
+          src="/images/bg/concert-bg.jpg"
           alt="Concert stage and crowd"
           className="hero__img"
         />

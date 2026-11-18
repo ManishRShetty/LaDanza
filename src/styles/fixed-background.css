@@ -1,4 +1,8 @@
-/* ── Global Fixed Concert Stage Background ────────── */
+/* ═══════════════════════════════════════════════════
+   LADANZA — Global Fixed Concert Stage Background
+   Ultra-Dark, Cinematic High-Contrast Arena Aesthetic
+   ═══════════════════════════════════════════════════ */
+
 .fixed-bg {
   position: fixed;
   inset: 0;
@@ -15,8 +19,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
-  filter: contrast(1.1) brightness(0.85);
+  object-position: center 32%;
+  filter: contrast(1.18) brightness(0.68) saturate(1.1);
   transform: scale(1.02);
 }
 
@@ -24,16 +28,25 @@
   position: absolute;
   inset: 0;
   background:
+    /* Top ambient golden beam bloom */
     radial-gradient(
-      ellipse at 50% 15%,
-      rgba(245, 180, 80, 0.2) 0%,
-      transparent 65%
+      ellipse at 50% 8%,
+      rgba(245, 185, 90, 0.18) 0%,
+      transparent 60%
     ),
+    /* Deep peripheral vignette to ensure perfect edge contrast */
+    radial-gradient(
+      ellipse at center,
+      transparent 35%,
+      rgba(8, 5, 3, 0.65) 100%
+    ),
+    /* Smooth vertical wash keeping text areas crisp and deep */
     linear-gradient(
       180deg,
-      rgba(8, 5, 3, 0.6) 0%,
-      rgba(20, 11, 5, 0.6) 45%,
-      rgba(8, 5, 3, 0.95) 100%
+      rgba(8, 5, 3, 0.45) 0%,
+      rgba(14, 8, 4, 0.55) 35%,
+      rgba(10, 6, 3, 0.72) 70%,
+      rgba(8, 5, 3, 0.94) 100%
     );
 }
 
@@ -48,52 +61,41 @@
 .fixed-bg__spotlight {
   position: absolute;
   top: -10%;
-  width: 280px;
+  width: 300px;
   height: 85%;
   background: conic-gradient(
     from 180deg at 50% 0%,
     transparent 160deg,
-    rgba(255, 205, 110, 0.16) 175deg,
-    rgba(255, 225, 150, 0.28) 180deg,
-    rgba(255, 205, 110, 0.16) 185deg,
+    rgba(255, 205, 110, 0.14) 175deg,
+    rgba(255, 225, 150, 0.24) 180deg,
+    rgba(255, 205, 110, 0.14) 185deg,
     transparent 200deg
   );
-  filter: blur(16px);
-  opacity: 0.85;
+  filter: blur(24px);
 }
 
 .fixed-bg__spotlight--center {
   left: 50%;
   transform: translateX(-50%);
-  width: 320px;
-  background: conic-gradient(
-    from 180deg at 50% 0%,
-    transparent 155deg,
-    rgba(255, 220, 130, 0.22) 175deg,
-    rgba(255, 240, 180, 0.35) 180deg,
-    rgba(255, 220, 130, 0.22) 185deg,
-    transparent 205deg
-  );
 }
 
 .fixed-bg__spotlight--left {
-  left: 20%;
-  transform: rotate(-12deg);
-  opacity: 0.65;
+  left: 18%;
+  transform: rotate(-14deg);
+  opacity: 0.6;
 }
 
 .fixed-bg__spotlight--right {
-  right: 20%;
-  transform: rotate(12deg);
-  opacity: 0.65;
+  right: 18%;
+  transform: rotate(14deg);
+  opacity: 0.6;
 }
 
 /* ── Golden Corner Waves ───────────────────────── */
 .fixed-bg__waves {
   position: absolute;
   pointer-events: none;
-  z-index: 2;
-  filter: drop-shadow(0 0 10px rgba(229, 179, 100, 0.35));
+  z-index: 1;
 }
 
 .fixed-bg__waves--top {
