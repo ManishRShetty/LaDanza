@@ -1,44 +1,55 @@
 import { useState, useEffect, useRef } from 'react'
 import '../styles/artists.css'
 
-const artists = [
+// ── The Single Performing Band & its Member Artists ──
+const bandInfo = {
+  name: 'THE VELVET SYNDICATE',
+  tagline: 'OFFICIAL HEADLINING BAND',
+  genre: 'Alternative Rock • Neo-Fusion • Symphony',
+}
+
+const bandMembers = [
   {
     id: 1,
-    name: 'Arjun Kanungo',
-    role: 'Headliner — Pop / Electronic',
-    bio: 'Chart-topping vocalist known for electrifying live sets that blur the line between pop and electronic music, with over 500 million streams worldwide.',
-    img: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=900&q=80',
-    number: '01'
+    name: 'Kabir Sen',
+    role: 'Lead Vocals & Frontman',
+    bio: 'Commanding frontman known for powerful vocal range, raw emotional anthems, and magnetic stage storytelling that connects with every corner of the arena.',
+    img: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
+    number: '01',
+    instrument: 'Vocals',
   },
   {
     id: 2,
-    name: 'Priya Ragu',
-    role: 'Featured — R&B / Soul',
-    bio: 'Boundary-breaking artist fusing Tamil heritage with contemporary R&B, crowned one of the year’s best by Rolling Stone and BBC Radio.',
-    img: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=900&q=80',
-    number: '02'
+    name: 'Aarav Mehta',
+    role: 'Lead Guitar & Backing Vocals',
+    bio: 'Virtuoso guitarist crafting atmospheric soundscapes and explosive solos, blending melodic rock riffs with intricate acoustic fingerstyle.',
+    img: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80',
+    number: '02',
+    instrument: 'Lead Guitar',
   },
   {
     id: 3,
-    name: 'Rajakumari',
-    role: 'Featured — Hip-Hop / Rap',
-    bio: 'Grammy-nominated rapper and songwriter with fierce lyricism, chart-topping anthems, and high-octane stage presence.',
-    img: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=900&q=80',
-    number: '03'
+    name: 'Rhea Kapoor',
+    role: 'Bass Guitar & Synthesizers',
+    bio: 'The rhythmic architect of the band, driving deep groove basslines and hypnotic synth textures that give the band its distinctive sonic weight.',
+    img: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=800&q=80',
+    number: '03',
+    instrument: 'Bass & Synth',
   },
   {
     id: 4,
-    name: 'Dhruv Visvanath',
-    role: 'Featured — Acoustic / Singer-Songwriter',
-    bio: 'Award-winning multi-instrumentalist whose percussive guitar style captivates audiences across four continents.',
-    img: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900&q=80',
-    number: '04'
+    name: 'Dev Malhotra',
+    role: 'Drums & Percussion',
+    bio: 'Dynamic percussionist delivering stadium-shaking drum beats, blending heavy rhythmic drive with subtle polyrhythmic nuances.',
+    img: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=800&q=80',
+    number: '04',
+    instrument: 'Drums',
   },
 ]
 
 export default function Artists() {
   const containerRef = useRef(null)
-  const [activeArtistIndex, setActiveArtistIndex] = useState(0)
+  const [activeMemberIndex, setActiveMemberIndex] = useState(0)
   const [scrollProgress, setScrollProgress] = useState(0)
 
   useEffect(() => {
@@ -58,129 +69,114 @@ export default function Artists() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Transition threshold: progress < 0.32 is Phase 1 (Logo center), >= 0.32 is Phase 2 (Artists showcase)
-  const isArtistsPhase = scrollProgress >= 0.32
-  const activeArtist = artists[activeArtistIndex]
+  // Progress < 0.32: Phase 1 (Band Logo Center) -> Progress >= 0.32: Phase 2 (Logo anchors below + Member Silhouettes arrive)
+  const isMembersPhase = scrollProgress >= 0.32
+  const activeMember = bandMembers[activeMemberIndex]
 
   return (
     <section className="artists-scroller" id="artists" ref={containerRef}>
       <div className="artists-sticky-stage">
         
-        {/* ── PHASE 1: Centered Brand Logo (Transitions down on scroll) ── */}
-        <div className={`artist-brand-anchor${isArtistsPhase ? ' is-placed-below' : ' is-centered'}`}>
-          <div className="artist-brand-anchor__eyebrow-wrap">
-            <span className="artist-brand-anchor__line" />
-            <p className="artist-brand-anchor__kicker">THE LINEUP</p>
-            <span className="artist-brand-anchor__line" />
+        {/* ── PHASE 1: Band's Own Logo & Crest (Not the event logo) ── */}
+        <div className={`band-logo-anchor${isMembersPhase ? ' is-placed-below' : ' is-centered'}`}>
+          <div className="band-logo-anchor__eyebrow-wrap">
+            <span className="band-logo-anchor__line" />
+            <p className="band-logo-anchor__kicker">LIVE PERFORMANCE BY</p>
+            <span className="band-logo-anchor__line" />
           </div>
 
-          <div className="artist-brand-anchor__logo-wrap">
-            <h2 className="artist-brand-anchor__title gold-gradient-text">Novera</h2>
-            
-            {/* Golden Orbit with Star Sparkle */}
-            <svg
-              className="artist-brand-anchor__orbit-svg"
-              viewBox="0 0 520 260"
-              fill="none"
-              aria-hidden="true"
-            >
-              <defs>
-                <linearGradient id="orbitGradArtist" x1="0%" y1="100%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#ca9846" stopOpacity="0.2" />
-                  <stop offset="30%" stopColor="#e5b364" stopOpacity="0.85" />
-                  <stop offset="65%" stopColor="#fff5db" stopOpacity="1" />
-                  <stop offset="100%" stopColor="#e5b364" stopOpacity="0.75" />
-                </linearGradient>
-                <filter id="starGlowArtist" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
+          <div className="band-logo-anchor__logo-wrap">
+            {/* Band Emblem Crest */}
+            <div className="band-logo-anchor__emblem" aria-hidden="true">
+              <svg viewBox="0 0 100 100" fill="none" className="band-crest-svg">
+                <circle cx="50" cy="50" r="46" stroke="url(#crestGrad)" strokeWidth="1.5" strokeDasharray="3 3" />
+                <circle cx="50" cy="50" r="38" stroke="url(#crestGrad)" strokeWidth="1.2" />
+                <path d="M 50 18 L 62 42 L 50 48 L 38 42 Z" fill="url(#crestGrad)" opacity="0.85" />
+                <path d="M 50 82 L 62 58 L 50 52 L 38 58 Z" fill="url(#crestGrad)" opacity="0.85" />
+                <circle cx="50" cy="50" r="5" fill="#ffffff" />
+                <defs>
+                  <linearGradient id="crestGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#ffffff" />
+                    <stop offset="50%" stopColor="#e5b364" />
+                    <stop offset="100%" stopColor="#9e6c27" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
 
-              <path
-                d="M 50 190 C 15 130, 70 85, 175 165 C 295 255, 455 200, 480 110 C 495 55, 430 75, 370 95"
-                stroke="url(#orbitGradArtist)"
-                strokeWidth="2.4"
-                strokeLinecap="round"
-              />
-
-              <g transform="translate(476, 92) scale(1.15)" filter="url(#starGlowArtist)">
-                <path
-                  d="M 0,-18 Q 1.5,-3 16,0 Q 1.5,3 0,18 Q -1.5,3 -16,0 Q -1.5,-3 0,-18 Z"
-                  fill="#ffffff"
-                />
-                <circle cx="0" cy="0" r="3.2" fill="#ffe7a8" />
-              </g>
-            </svg>
+            {/* Band Name Typography */}
+            <h2 className="band-logo-anchor__name gold-gradient-text">
+              {bandInfo.name}
+            </h2>
           </div>
 
-          <p className="artist-brand-anchor__subtitle">FOUR ARTISTS &bull; ONE STAGE</p>
+          <p className="band-logo-anchor__tagline">
+            {bandInfo.tagline} &bull; {bandInfo.genre}
+          </p>
         </div>
 
-        {/* ── PHASE 2: 4 Black & White Artists with Hover-to-Color & Spotlight ── */}
-        <div className={`artists-content${isArtistsPhase ? ' is-visible' : ' is-hidden'}`}>
-          <div className="artists-header-pill">
-            <span className="artists-header-pill__dot" />
-            <span>FEATURED ARTISTS</span>
+        {/* ── PHASE 2: Band Member Paper-Cut Silhouettes (No background, B&W -> Hover Color) ── */}
+        <div className={`band-members-content${isMembersPhase ? ' is-visible' : ' is-hidden'}`}>
+          <div className="band-members-pill">
+            <span className="band-members-pill__dot" />
+            <span>BAND LINEUP &bull; 4 PERFORMERS</span>
           </div>
 
-          {/* 4 Black and White Artist Photo Cards */}
-          <div className="artists-photos-row" role="list" aria-label="Artists Lineup">
-            {artists.map((artist, idx) => {
-              const isSelected = activeArtistIndex === idx
+          {/* 4 Member Paper-Cut / Cutout Silhouettes */}
+          <div className="band-members-row" role="list" aria-label="Band Members">
+            {bandMembers.map((member, idx) => {
+              const isSelected = activeMemberIndex === idx
               return (
                 <div
-                  key={artist.id}
-                  className={`artist-photo-card${isSelected ? ' is-active' : ''}`}
-                  onMouseEnter={() => setActiveArtistIndex(idx)}
-                  onClick={() => setActiveArtistIndex(idx)}
+                  key={member.id}
+                  className={`member-silhouette-item${isSelected ? ' is-active' : ''}`}
+                  onMouseEnter={() => setActiveMemberIndex(idx)}
+                  onClick={() => setActiveMemberIndex(idx)}
                   role="listitem"
                   tabIndex={0}
-                  onFocus={() => setActiveArtistIndex(idx)}
-                  aria-label={artist.name}
+                  onFocus={() => setActiveMemberIndex(idx)}
+                  aria-label={member.name}
                 >
-                  <div className="artist-photo-card__frame">
+                  {/* Silhouette Cutout Figure (No boxy background, paper-cut contour) */}
+                  <div className="member-silhouette-figure">
                     <img
-                      src={artist.img}
-                      alt={artist.name}
-                      className="artist-photo-card__img"
+                      src={member.img}
+                      alt={member.name}
+                      className="member-silhouette-img"
                       loading="lazy"
                     />
-                    <div className="artist-photo-card__overlay" />
-                    <span className="artist-photo-card__badge">{artist.number}</span>
+                    <div className="member-silhouette-aura" />
                   </div>
 
-                  {/* Card Bottom Tag */}
-                  <div className="artist-photo-card__name-tag">
-                    <span>{artist.name}</span>
+                  {/* Member Role Pill under silhouette */}
+                  <div className="member-silhouette-tag">
+                    <span className="member-silhouette-num">{member.number}</span>
+                    <span className="member-silhouette-label">{member.name}</span>
                   </div>
                 </div>
               )
             })}
           </div>
 
-          {/* Active Artist Spotlight Information Below */}
-          <div className="artist-spotlight" key={activeArtist.id}>
-            <div className="artist-spotlight__bar" />
-            <h3 className="artist-spotlight__name gold-gradient-text">
-              {activeArtist.name}
+          {/* Active Member Spotlight Information Displayed Below */}
+          <div className="member-spotlight" key={activeMember.id}>
+            <div className="member-spotlight__bar" />
+            <h3 className="member-spotlight__name gold-gradient-text">
+              {activeMember.name}
             </h3>
-            <p className="artist-spotlight__role">
-              {activeArtist.role}
+            <p className="member-spotlight__role">
+              {activeMember.role} &bull; {activeMember.instrument}
             </p>
-            <p className="artist-spotlight__bio">
-              {activeArtist.bio}
+            <p className="member-spotlight__bio">
+              {activeMember.bio}
             </p>
           </div>
         </div>
 
-        {/* Subtle Phase Indicator Dots */}
+        {/* Subtle Scrollytelling Phase Indicator Dots */}
         <div className="artists-phase-indicators" aria-hidden="true">
-          <span className={`phase-dot${!isArtistsPhase ? ' phase-dot--active' : ''}`} />
-          <span className={`phase-dot${isArtistsPhase ? ' phase-dot--active' : ''}`} />
+          <span className={`phase-dot${!isMembersPhase ? ' phase-dot--active' : ''}`} />
+          <span className={`phase-dot${isMembersPhase ? ' phase-dot--active' : ''}`} />
         </div>
 
       </div>
